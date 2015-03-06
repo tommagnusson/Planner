@@ -10,7 +10,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import org.controlsfx.dialog.Dialogs;
 import org.sjcadets.planner.App;

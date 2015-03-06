@@ -1,14 +1,13 @@
 package org.sjcadets.planner.view.dialogs;
 
 import java.io.FileNotFoundException;
-import java.time.LocalDate;
-
-import javax.xml.bind.JAXBException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import javax.xml.bind.JAXBException;
 
 import org.controlsfx.dialog.Dialogs;
 import org.sjcadets.planner.AppData;
