@@ -1,10 +1,7 @@
 package org.sjcadets.planner.xml;
 
-import java.util.List;
-
 import javafx.collections.ObservableList;
 
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.sjcadets.planner.model.Course;

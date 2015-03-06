@@ -13,13 +13,9 @@ import javafx.stage.Stage;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
 
-import org.sjcadets.planner.model.Task;
 import org.sjcadets.planner.view.BaseController;
 import org.sjcadets.planner.xml.TaskListWrapper;
-import org.xml.sax.SAXException;
 
 /**
  * The main application. This application serves as a "replacement"

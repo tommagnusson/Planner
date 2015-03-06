@@ -1,15 +1,14 @@
 package org.sjcadets.planner.model;
 import java.time.LocalDate;
 
-import javax.xml.bind.annotation.XmlElement;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.sjcadets.planner.xml.LocalDateAdapter;
-
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.SimpleObjectProperty;
 
 /**
  * A Java bean representing all the information associated with a <code>Task</code>.

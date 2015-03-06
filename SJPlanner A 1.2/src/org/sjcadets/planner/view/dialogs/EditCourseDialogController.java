@@ -4,14 +4,14 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.JAXBException;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
+
+import javax.xml.bind.JAXBException;
 
 import org.controlsfx.dialog.Dialogs;
 import org.sjcadets.planner.AppData;

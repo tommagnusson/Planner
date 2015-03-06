@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 
 import org.controlsfx.dialog.Dialogs;
 import org.sjcadets.planner.App;
-import org.sjcadets.planner.AppData;
 import org.sjcadets.planner.view.dialogs.EditCourseDialogController;
 import org.sjcadets.planner.view.dialogs.EditStudentInfoDialogController;
 import org.sjcadets.planner.view.dialogs.EditTaskDialogController;
