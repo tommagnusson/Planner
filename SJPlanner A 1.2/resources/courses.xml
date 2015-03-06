@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<courses>
+    <courses>
+        <lunchWave>4</lunchWave>
+        <materials>Seven books</materials>
+        <name>English</name>
+        <period>E</period>
+        <roomNumber>311</roomNumber>
+        <teacher>Lowell</teacher>
+    </courses>
+    <courses>
+        <lunchWave>2</lunchWave>
+        <materials>notebook</materials>
+        <name>Math</name>
+        <period>B</period>
+        <roomNumber>107</roomNumber>
+        <teacher>Mrs. Dennin</teacher>
+    </courses>
+</courses>

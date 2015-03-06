@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="schedulePane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sjcadets.planner.view.ScheduleController">
+   <children>
+      <VBox prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <GridPane>
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Counselor" />
+                        <Label text="Locker Number" GridPane.rowIndex="1" />
+                        <Label text="Locker Combination" GridPane.rowIndex="2" />
+                        <Label fx:id="counselorLabel" text="Label" GridPane.columnIndex="1" />
+                        <Label fx:id="lockerNumberLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Homeroom" GridPane.rowIndex="3" />
+                        <Label fx:id="homeroomLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <children>
+                              <Label fx:id="lockerFirstLabel" text="Label" />
+                              <Label text="-" />
+                              <Label fx:id="lockerSecondLabel" text="Label" />
+                              <Label text="-" />
+                              <Label fx:id="lockerThirdLabel" text="Label" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </GridPane>
+                  <Button fx:id="editStudentInfo" mnemonicParsing="false" onAction="#onEditStudentInfo" text="Edit Student Info" />
+                  <Label text="Schedule" />
+               </children>
+            </HBox>
+            <TableView fx:id="courseTable" maxWidth="800.0" prefHeight="498.0" prefWidth="800.0">
+              <columns>
+                <TableColumn fx:id="periodColumn" prefWidth="51.0" text="Period" />
+                <TableColumn fx:id="classNameColumn" prefWidth="174.0" text="Course" />
+                  <TableColumn fx:id="teacherColumn" prefWidth="198.0" text="Teacher" />
+                  <TableColumn fx:id="materialsColumn" prefWidth="206.0" text="Materials" />
+                  <TableColumn fx:id="roomColumn" prefWidth="88.0" text="Room" />
+                  <TableColumn fx:id="lunchWaveColumn" prefWidth="82.0" text="Lunch Wave" />
+              </columns>
+            </TableView>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
