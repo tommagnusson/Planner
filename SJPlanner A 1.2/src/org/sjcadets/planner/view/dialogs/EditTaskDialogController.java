@@ -12,7 +12,7 @@ import javax.xml.bind.JAXBException;
 import org.controlsfx.dialog.Dialogs;
 import org.sjcadets.planner.AppData;
 import org.sjcadets.planner.model.Task;
-//6estestest
+
 public class EditTaskDialogController {
 	@FXML
 	TextField assignmentField;
