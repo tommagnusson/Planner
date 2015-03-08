@@ -1,9 +1,12 @@
 package org.sjcadets.planner.view.dialogs;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+
+import javax.xml.bind.JAXBException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -70,8 +73,14 @@ public class EditEventDialogController extends InputDialogController {
 			return t;
 		}
 		//TODO
-		public boolean validTime(LocalTime lt) {
+		public boolean validTime(String input) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
+			try {
+				formatter.parse(input);
+			} catch (Exception e) {
+				return false;
+			}
+			return true;
 		}
 		
 	}
@@ -93,8 +102,14 @@ public class EditEventDialogController extends InputDialogController {
 			.showWarning();
 			return;
 		}
-		//TODO make AppData.getMasterEventList()
-		AppData.save();
+		AppData.getMasterEventList().add(event);
+		try {
+			AppData.save();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
 		getDialogStage().close();
 	}
 

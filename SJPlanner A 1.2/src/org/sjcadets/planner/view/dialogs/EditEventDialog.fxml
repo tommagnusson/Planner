@@ -24,22 +24,22 @@
          <children>
             <Label text="Event" />
             <Label text="Location" GridPane.rowIndex="1" />
-            <TextField promptText="Lacrosse Practice" GridPane.columnIndex="1" />
-            <TextField promptText="SJ Turf Field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="eventNameField" promptText="Lacrosse Practice" GridPane.columnIndex="1" />
+            <TextField fx:id="locationField" promptText="SJ Turf Field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label text="Starting Date" GridPane.rowIndex="2" />
-            <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <DatePicker fx:id="startDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Ending Date" GridPane.rowIndex="4" />
-            <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <DatePicker fx:id="endDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label text="Starting Time" GridPane.rowIndex="3" />
             <Label text="Ending Time" GridPane.rowIndex="5" />
-            <TextField text="00:00 a" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField text="00:00 a" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="startTimeField" text="00:00 a" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="endTimeField" text="00:00 a" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
       <HBox layoutX="229.0" layoutY="252.0" spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
          <children>
-            <Button layoutX="229.0" layoutY="252.0" mnemonicParsing="false" onAction="#onSave" text="Save" />
-            <Button layoutX="302.0" layoutY="252.0" mnemonicParsing="false" onAction="#onCancel" text="Cancel" />
+            <Button fx:id="saveButton" layoutX="229.0" layoutY="252.0" mnemonicParsing="false" onAction="#onSave" text="Save" />
+            <Button fx:id="cancelButton" layoutX="302.0" layoutY="252.0" mnemonicParsing="false" onAction="#onCancel" text="Cancel" />
          </children>
       </HBox>
    </children>

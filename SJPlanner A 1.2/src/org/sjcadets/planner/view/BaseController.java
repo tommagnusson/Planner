@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import org.controlsfx.dialog.Dialogs;
 import org.sjcadets.planner.App;
 import org.sjcadets.planner.view.dialogs.EditCourseDialogController;
+import org.sjcadets.planner.view.dialogs.EditEventDialogController;
 import org.sjcadets.planner.view.dialogs.EditStudentInfoDialogController;
 import org.sjcadets.planner.view.dialogs.EditTaskDialogController;
 
@@ -209,6 +210,32 @@ public class BaseController {
 			e.printStackTrace();
 			Dialogs.create().title("Error").masthead("Could Not Save").message(e.getMessage()).showError();
 			return;
+		}
+	}
+	@FXML
+	public void onAddEvent() {
+		try {
+			//Load XML
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(App.class.getResource("view/dialogs/EditEventDialog.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+			
+			//Create dialog stage (new pop-up window)
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("Edit Event");
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(baseTabPane.getScene().getWindow());
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+			
+			EditEventDialogController controller = loader.getController();
+			
+			controller.setDialogStage(dialogStage);
+			
+			//show the dialog and wait until the user closes it
+			dialogStage.showAndWait();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

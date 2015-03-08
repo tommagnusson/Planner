@@ -132,6 +132,8 @@ public class App extends Application {
 				
 				Unmarshaller um = context.createUnmarshaller();
 				
+				System.out.println(um.toString());
+				
 				//TODO: Wtf idk what's happening with this, null pointer exception
 				TaskListWrapper taskList = (TaskListWrapper) um.unmarshal(tasks);
 				//System.out.println(umObject.getClass());
