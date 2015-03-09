@@ -14,6 +14,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import org.sjcadets.planner.model.StudentInfo;
+import org.sjcadets.planner.model.Task;
 import org.sjcadets.planner.view.BaseController;
 import org.sjcadets.planner.xml.TaskListWrapper;
 
@@ -123,35 +125,56 @@ public class App extends Application {
 			courses.createNewFile();
 		}
 		
-		if(tasks.exists()){
+		/*if(tasks.exists()){
 			try {
 				JAXBContext context = JAXBContext.newInstance(TaskListWrapper.class);
 				
-				System.out.println(tasks.toString());
-				System.out.println(context.toString());
+				//System.out.println(tasks.toString());
+				//System.out.println(context.toString());
 				
 				Unmarshaller um = context.createUnmarshaller();
 				
-				System.out.println(um.toString());
+				//System.out.println(um.toString());
 				
 				//TODO: Wtf idk what's happening with this, null pointer exception
-				TaskListWrapper taskList = (TaskListWrapper) um.unmarshal(tasks);
-				//System.out.println(umObject.getClass());
+				Task taskList = (Task) um.unmarshal(tasks);
+				System.out.println(taskList.getAssignment());
+				
 			} catch (JAXBException e) {
 				e.printStackTrace();
 			}
 			
 		} else {
 			tasks.createNewFile();
-		}
+		}*/
 		
 		if(events.exists()) {
 			//unmarshall events from file into AppData
 		} else {
 			events.createNewFile();
 		}
+		
+		//Works perfectly. No wrapper classes involved
 		if(studentInfo.exists()) {
-			//unmarshall studentInfo from file into AppData
+			try {
+				JAXBContext context = JAXBContext.newInstance(StudentInfo.class);
+				
+				Unmarshaller unmarshaller = context.createUnmarshaller();
+				
+				StudentInfo si = (StudentInfo) unmarshaller.unmarshal(studentInfo);
+				AppData.getMasterStudentInfo().setCounselor(si.getCounselor());
+				AppData.getMasterStudentInfo().setFirstName(si.getFirstName());
+				AppData.getMasterStudentInfo().setHomeRoom(si.getHomeRoom());
+				AppData.getMasterStudentInfo().setLastName(si.getLastName());
+				AppData.getMasterStudentInfo().setLockerFirst(si.getLockerFirst());
+				AppData.getMasterStudentInfo().setLockerNumber(si.getLockerNumber());
+				AppData.getMasterStudentInfo().setLockerSecond(si.getLockerSecond());
+				AppData.getMasterStudentInfo().setLockerThird(si.getLockerThird());
+				AppData.getMasterStudentInfo().setYear(si.getYear());
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 		} else {
 			studentInfo.createNewFile();
 		}

@@ -16,12 +16,4 @@
         <roomNumber>107</roomNumber>
         <teacher>Mrs. Dennin</teacher>
     </courses>
-    <courses>
-        <lunchWave>4</lunchWave>
-        <materials>Textbook, notebook</materials>
-        <name>Science</name>
-        <period>A</period>
-        <roomNumber>310</roomNumber>
-        <teacher>Mr. Stolzenburg</teacher>
-    </courses>
 </courses>
