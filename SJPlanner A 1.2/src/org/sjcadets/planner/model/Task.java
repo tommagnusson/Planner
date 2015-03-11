@@ -5,6 +5,8 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -20,6 +22,7 @@ import org.sjcadets.planner.xml.LocalDateAdapter;
  * data needs to be stored in properties.
  */
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class Task {
 	//constructors
 	

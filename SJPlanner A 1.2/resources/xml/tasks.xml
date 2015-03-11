@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <tasks>
-    <task>
+    <tasks>
         <task>
             <assignment>Book</assignment>
             <className>Math</className>
@@ -17,13 +17,13 @@
             <assignment>Read</assignment>
             <className>English</className>
             <description>1984</description>
-            <dueDate>2015-03-11</dueDate>
+            <dueDate>2015-03-12</dueDate>
         </task>
         <task>
             <assignment>asdf</assignment>
             <className>asdf</className>
             <description>asdf</description>
-            <dueDate>2015-03-16</dueDate>
+            <dueDate>2015-03-11</dueDate>
         </task>
-    </task>
+    </tasks>
 </tasks>
