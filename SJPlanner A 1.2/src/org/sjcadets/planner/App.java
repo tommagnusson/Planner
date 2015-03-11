@@ -119,13 +119,22 @@ public class App extends Application {
 		File studentInfo = new File(System.getProperty("user.dir")+ "/resources/xml/student_info.xml");
 		
 		//check if each file exists, if so unmarshall 
-		if(courses.exists()) {
-			//unmarshall from xml file using the schema
+		/*if(courses.exists()) {
+			try {
+				JAXBContext context = JAXBContext.newInstance(CourseListWrapper.class);
+				
+				Unmarshaller unmarshaller = context.createUnmarshaller();
+				
+				CourseListWrapper clr = (CourseListWrapper) unmarshaller.unmarshal(courses);
+				System.out.println(clr.getCourses().get(0).getName());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else {
 			courses.createNewFile();
-		}
+		}*/
 		
-		/*if(tasks.exists()){
+		if(tasks.exists()){
 			try {
 				JAXBContext context = JAXBContext.newInstance(TaskListWrapper.class);
 				
@@ -137,8 +146,8 @@ public class App extends Application {
 				//System.out.println(um.toString());
 				
 				//TODO: Wtf idk what's happening with this, null pointer exception
-				Task taskList = (Task) um.unmarshal(tasks);
-				System.out.println(taskList.getAssignment());
+				TaskListWrapper taskList = (TaskListWrapper) um.unmarshal(tasks);
+				System.out.println(taskList.getTasks().get(0).getAssignment());
 				
 			} catch (JAXBException e) {
 				e.printStackTrace();
@@ -146,7 +155,7 @@ public class App extends Application {
 			
 		} else {
 			tasks.createNewFile();
-		}*/
+		}
 		
 		if(events.exists()) {
 			//unmarshall events from file into AppData
