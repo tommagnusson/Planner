@@ -1,19 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <courses>
-    <courses>
+    <course>
         <lunchWave>4</lunchWave>
         <materials>Seven books</materials>
         <name>English</name>
         <period>E</period>
         <roomNumber>311</roomNumber>
         <teacher>Lowell</teacher>
-    </courses>
-    <courses>
+    </course>
+    <course>
         <lunchWave>2</lunchWave>
         <materials>notebook</materials>
         <name>Math</name>
         <period>B</period>
         <roomNumber>107</roomNumber>
         <teacher>Mrs. Dennin</teacher>
-    </courses>
+    </course>
+    <course>
+        <lunchWave>4</lunchWave>
+        <materials>Textbook</materials>
+        <name>English</name>
+        <period>E</period>
+        <roomNumber>311</roomNumber>
+        <teacher>Ms. Lowell</teacher>
+    </course>
+    <course>
+        <lunchWave>3</lunchWave>
+        <materials>iPad</materials>
+        <name>History</name>
+        <period>D</period>
+        <roomNumber>205</roomNumber>
+        <teacher>Mrs. Bowman</teacher>
+    </course>
 </courses>

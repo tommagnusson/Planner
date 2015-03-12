@@ -16,6 +16,7 @@ import javax.xml.bind.Unmarshaller;
 
 import org.sjcadets.planner.model.StudentInfo;
 import org.sjcadets.planner.view.BaseController;
+import org.sjcadets.planner.xml.CourseList;
 import org.sjcadets.planner.xml.TaskList;
 
 /**
@@ -118,29 +119,29 @@ public class App extends Application {
 		File studentInfo = new File(System.getProperty("user.dir")+ "/resources/xml/student_info.xml");
 		
 		//check if each file exists, if so unmarshall 
-		/*if(courses.exists()) {
+		if(courses.exists()) {
 			try {
-				JAXBContext context = JAXBContext.newInstance(CourseListWrapper.class);
-				
+				JAXBContext context = JAXBContext.newInstance(CourseList.class);
 				Unmarshaller unmarshaller = context.createUnmarshaller();
+				CourseList cl = (CourseList) unmarshaller.unmarshal(courses);
 				
-				CourseListWrapper clr = (CourseListWrapper) unmarshaller.unmarshal(courses);
-				System.out.println(clr.getCourses().get(0).getName());
+				AppData.getMasterCourseList().addAll(cl.getCourses());
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else {
 			courses.createNewFile();
-		}*/
+		}
 		
 		if(tasks.exists()){
 			try {
+				
 				JAXBContext context = JAXBContext.newInstance(TaskList.class);
-				
 				Unmarshaller um = context.createUnmarshaller();
-				
 				TaskList taskList = (TaskList) um.unmarshal(tasks);
 				
+				//load courses into local memory
 				AppData.getMasterTaskList().addAll(taskList.getTasks());
 				
 			} catch (JAXBException e) {

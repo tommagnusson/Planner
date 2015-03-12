@@ -16,7 +16,7 @@ import org.sjcadets.planner.model.Course;
 import org.sjcadets.planner.model.Event;
 import org.sjcadets.planner.model.StudentInfo;
 import org.sjcadets.planner.model.Task;
-import org.sjcadets.planner.xml.CourseListWrapper;
+import org.sjcadets.planner.xml.CourseList;
 import org.sjcadets.planner.xml.TaskList;
 
 /**
@@ -83,8 +83,8 @@ public final class AppData {
 		//AppData.getMasterTaskList().add(new Task("Religion", "Textbook", "problems", LocalDate.of(2015, 1, 17)));
 		//AppData.getMasterTaskList().add(new Task());
 		
-		AppData.getMasterCourseList().add(new Course());
-		AppData.getMasterCourseList().add(new Course("Math", "Mrs. Dennin", "107", "B", "notebook", "2"));
+		//AppData.getMasterCourseList().add(new Course());
+		//AppData.getMasterCourseList().add(new Course("Math", "Mrs. Dennin", "107", "B", "notebook", "2"));
 	}
 	
 	/**
@@ -95,7 +95,7 @@ public final class AppData {
 	public static void save() throws JAXBException, FileNotFoundException {
 		
 		//class used for XML specific tasks
-		CourseListWrapper cl = new CourseListWrapper();
+		CourseList cl = new CourseList();
 		cl.setCourses(getMasterCourseList());
 		
 		saveObject(cl, new File(System.getProperty("user.dir") + "/resources/xml/courses.xml"));
