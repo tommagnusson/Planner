@@ -12,13 +12,13 @@ public class TaskListAdapter extends XmlAdapter<TaskList, ObservableList<Task>>{
 	@Override
 	public TaskList marshal(ObservableList<Task> oList) throws Exception {
 		TaskList tList = new TaskList();
-		oList.stream().forEach((item) -> tList.items.add(item));
+		oList.stream().forEach((item) -> tList.getTasks().add(item));
 		return tList;
 	}
 
 	@Override
 	public ObservableList<Task> unmarshal(TaskList tList) throws Exception {
-		ObservableList<Task> oList = FXCollections.observableArrayList(tList.items);
+		ObservableList<Task> oList = FXCollections.observableArrayList(tList.getTasks());
 		return oList;
 	}
 

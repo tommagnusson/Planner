@@ -17,7 +17,7 @@ import org.sjcadets.planner.model.Event;
 import org.sjcadets.planner.model.StudentInfo;
 import org.sjcadets.planner.model.Task;
 import org.sjcadets.planner.xml.CourseListWrapper;
-import org.sjcadets.planner.xml.TaskListWrapper;
+import org.sjcadets.planner.xml.TaskList;
 
 /**
  * Class to hold all the app's data, such as
@@ -100,7 +100,7 @@ public final class AppData {
 		
 		saveObject(cl, new File(System.getProperty("user.dir") + "/resources/xml/courses.xml"));
 		
-		TaskListWrapper tl = new TaskListWrapper();
+		TaskList tl = new TaskList();
 		tl.setTasks(AppData.getMasterTaskList());
 		
 		saveObject(tl, new File(System.getProperty("user.dir") + "/resources/xml/tasks.xml"));

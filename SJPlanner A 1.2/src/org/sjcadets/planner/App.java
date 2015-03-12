@@ -15,9 +15,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import org.sjcadets.planner.model.StudentInfo;
-import org.sjcadets.planner.model.Task;
 import org.sjcadets.planner.view.BaseController;
-import org.sjcadets.planner.xml.TaskListWrapper;
+import org.sjcadets.planner.xml.TaskList;
 
 /**
  * The main application. This application serves as a "replacement"
@@ -136,17 +135,12 @@ public class App extends Application {
 		
 		if(tasks.exists()){
 			try {
-				JAXBContext context = JAXBContext.newInstance(TaskListWrapper.class);
-				
-				//System.out.println(tasks.toString());
-				//System.out.println(context.toString());
+				JAXBContext context = JAXBContext.newInstance(TaskList.class);
 				
 				Unmarshaller um = context.createUnmarshaller();
 				
-				//System.out.println(um.toString());
 				
-				//TODO: Wtf idk what's happening with this, null pointer exception
-				TaskListWrapper taskList = (TaskListWrapper) um.unmarshal(tasks);
+				TaskList taskList = (TaskList) um.unmarshal(tasks);
 				System.out.println(taskList.getTasks().get(0).getAssignment());
 				
 			} catch (JAXBException e) {
