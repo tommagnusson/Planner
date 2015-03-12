@@ -79,9 +79,9 @@ public final class AppData {
 	 * Used for populating the the various lists with test data.
 	 */
 	public static void populateLists() {
-		AppData.getMasterTaskList().add(new Task("Math", "Book", "problems", LocalDate.of(2015, 1, 17)));
-		AppData.getMasterTaskList().add(new Task("Religion", "Textbook", "problems", LocalDate.of(2015, 1, 17)));
-		AppData.getMasterTaskList().add(new Task());
+		//AppData.getMasterTaskList().add(new Task("Math", "Book", "problems", LocalDate.of(2015, 1, 17)));
+		//AppData.getMasterTaskList().add(new Task("Religion", "Textbook", "problems", LocalDate.of(2015, 1, 17)));
+		//AppData.getMasterTaskList().add(new Task());
 		
 		AppData.getMasterCourseList().add(new Course());
 		AppData.getMasterCourseList().add(new Course("Math", "Mrs. Dennin", "107", "B", "notebook", "2"));

@@ -19,9 +19,15 @@
         <dueDate>2015-03-12</dueDate>
     </task>
     <task>
-        <assignment>a</assignment>
-        <className>as</className>
-        <description>ass</description>
-        <dueDate>2015-03-10</dueDate>
+        <assignment>Terms</assignment>
+        <className>History</className>
+        <description>suck</description>
+        <dueDate>2015-03-13</dueDate>
+    </task>
+    <task>
+        <assignment>What</assignment>
+        <className>is</className>
+        <description>this</description>
+        <dueDate>2015-03-12</dueDate>
     </task>
 </tasks>

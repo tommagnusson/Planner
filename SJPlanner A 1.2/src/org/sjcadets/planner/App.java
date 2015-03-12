@@ -139,9 +139,9 @@ public class App extends Application {
 				
 				Unmarshaller um = context.createUnmarshaller();
 				
-				
 				TaskList taskList = (TaskList) um.unmarshal(tasks);
-				System.out.println(taskList.getTasks().get(0).getAssignment());
+				
+				AppData.getMasterTaskList().addAll(taskList.getTasks());
 				
 			} catch (JAXBException e) {
 				e.printStackTrace();
