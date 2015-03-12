@@ -15,9 +15,9 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import org.sjcadets.planner.model.StudentInfo;
+import org.sjcadets.planner.model.xml.CourseList;
+import org.sjcadets.planner.model.xml.TaskList;
 import org.sjcadets.planner.view.BaseController;
-import org.sjcadets.planner.xml.CourseList;
-import org.sjcadets.planner.xml.TaskList;
 
 /**
  * The main application. This application serves as a "replacement"
@@ -67,7 +67,7 @@ public class App extends Application {
 			initBase();
 			
 			//sets up files
-			initFiles();
+			AppData.initFiles();
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -105,82 +105,5 @@ public class App extends Application {
 		}
 	}
 	
-	/**
-	 * Initial setup for all the files for the program. Contains all the
-	 * persistent data for the planner, such as courses, tasks, and events.
-	 * <p>
-	 * All data is saved in {@code [place of installment]/resources/xml/...}.
-	 * @throws IOException
-	 */
-	public void initFiles() throws IOException{
-		File courses = new File(System.getProperty("user.dir") + "/resources/xml/courses.xml");
-		File tasks = new File(System.getProperty("user.dir") + "/resources/xml/tasks.xml");
-		File events = new File(System.getProperty("user.dir")+ "/resources/xml/events.xml");
-		File studentInfo = new File(System.getProperty("user.dir")+ "/resources/xml/student_info.xml");
-		
-		//check if each file exists, if so unmarshall 
-		if(courses.exists()) {
-			try {
-				JAXBContext context = JAXBContext.newInstance(CourseList.class);
-				Unmarshaller unmarshaller = context.createUnmarshaller();
-				CourseList cl = (CourseList) unmarshaller.unmarshal(courses);
-				
-				AppData.getMasterCourseList().addAll(cl.getCourses());
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else {
-			courses.createNewFile();
-		}
-		
-		if(tasks.exists()){
-			try {
-				
-				JAXBContext context = JAXBContext.newInstance(TaskList.class);
-				Unmarshaller um = context.createUnmarshaller();
-				TaskList taskList = (TaskList) um.unmarshal(tasks);
-				
-				//load courses into local memory
-				AppData.getMasterTaskList().addAll(taskList.getTasks());
-				
-			} catch (JAXBException e) {
-				e.printStackTrace();
-			}
-			
-		} else {
-			tasks.createNewFile();
-		}
-		
-		if(events.exists()) {
-			//unmarshall events from file into AppData
-		} else {
-			events.createNewFile();
-		}
-		
-		//Works perfectly. No wrapper classes involved
-		if(studentInfo.exists()) {
-			try {
-				JAXBContext context = JAXBContext.newInstance(StudentInfo.class);
-				
-				Unmarshaller unmarshaller = context.createUnmarshaller();
-				
-				StudentInfo si = (StudentInfo) unmarshaller.unmarshal(studentInfo);
-				AppData.getMasterStudentInfo().setCounselor(si.getCounselor());
-				AppData.getMasterStudentInfo().setFirstName(si.getFirstName());
-				AppData.getMasterStudentInfo().setHomeRoom(si.getHomeRoom());
-				AppData.getMasterStudentInfo().setLastName(si.getLastName());
-				AppData.getMasterStudentInfo().setLockerFirst(si.getLockerFirst());
-				AppData.getMasterStudentInfo().setLockerNumber(si.getLockerNumber());
-				AppData.getMasterStudentInfo().setLockerSecond(si.getLockerSecond());
-				AppData.getMasterStudentInfo().setLockerThird(si.getLockerThird());
-				AppData.getMasterStudentInfo().setYear(si.getYear());
-				
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-		} else {
-			studentInfo.createNewFile();
-		}
-	}
+
 }

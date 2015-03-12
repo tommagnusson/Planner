@@ -1,4 +1,4 @@
-package org.sjcadets.planner.xml;
+package org.sjcadets.planner.model.xml;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

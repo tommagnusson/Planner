@@ -1,4 +1,4 @@
-package org.sjcadets.planner.xml;
+package org.sjcadets.planner.model.xml;
 
 import java.util.ArrayList;
 import java.util.List;

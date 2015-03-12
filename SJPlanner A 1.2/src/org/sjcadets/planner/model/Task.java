@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import org.sjcadets.planner.xml.LocalDateAdapter;
+import org.sjcadets.planner.model.xml.LocalDateAdapter;
 
 /**
  * A Java bean representing all the information associated with a <code>Task</code>.
