@@ -1,16 +1,22 @@
 package org.sjcadets.planner.view;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import org.controlsfx.control.action.Action;
+import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 import org.sjcadets.planner.App;
 import org.sjcadets.planner.AppData;
@@ -64,8 +70,27 @@ public class ScheduleController {
 		materialsColumn.setCellValueFactory(cellData -> cellData.getValue().materialsProperty());
 		lunchWaveColumn.setCellValueFactory(cellData -> cellData.getValue().lunchWaveProperty());
 		
+		//init context menus (mouse right clicked on a row)
+		MenuItem deleteCourseItem = new MenuItem("Delete Course");
+		deleteCourseItem.setOnAction((ActionEvent e) -> {
+		    	
+		    	//"Are you sure?" dialog
+		    	Action delete = Dialogs.create().title("Delete Course")
+		    			.masthead("Are you sure?")
+		    			.message("Delete this course?").showConfirm();
+		    	if(delete == Dialog.Actions.YES) {
+		    		//delete course
+		    		Course toBeDeleted = courseTable.getSelectionModel().getSelectedItem();
+		    		AppData.getMasterCourseList().remove(toBeDeleted);
+		    		try {AppData.save();} catch(Exception ex) {ex.printStackTrace();}
+		    	}
+		    	
+		});
+		final ContextMenu contextMenu = new ContextMenu();
+		courseTable.setContextMenu(contextMenu);
+		contextMenu.getItems().add(deleteCourseItem);
 	}
-	
+
 	private void initStudentInfoLabels() {
 		//check if the AppData has any information for the masterStudentInfo
 		//if not..
