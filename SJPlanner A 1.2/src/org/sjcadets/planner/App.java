@@ -1,8 +1,5 @@
 package org.sjcadets.planner;
 	
-import java.io.File;
-import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,13 +7,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-
-import org.sjcadets.planner.model.StudentInfo;
-import org.sjcadets.planner.model.xml.CourseList;
-import org.sjcadets.planner.model.xml.TaskList;
 import org.sjcadets.planner.view.BaseController;
 
 /**

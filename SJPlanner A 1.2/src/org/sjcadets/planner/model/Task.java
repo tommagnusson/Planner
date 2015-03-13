@@ -2,6 +2,7 @@ package org.sjcadets.planner.model;
 import java.time.LocalDate;
 
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -27,12 +28,13 @@ public class Task {
 	//constructors
 	
 	//complete constructor
-	public Task(String className, String assignment, String description, LocalDate dueDate) {
+	public Task(String className, String assignment, String description, LocalDate dueDate, Boolean completed) {
 		this.className = new SimpleStringProperty(className);
 		this.assignment = new SimpleStringProperty(assignment);
 		this.description = new SimpleStringProperty(description);
 		
 		this.dueDate = new SimpleObjectProperty<LocalDate>(dueDate);
+		this.completed = new SimpleBooleanProperty(completed);
 	}
 	
 	/**
@@ -40,7 +42,7 @@ public class Task {
 	 * due date to be tomorrow.
 	 */
 	public Task() {
-		this("", "", "", LocalDate.now().plusDays(1));
+		this("", "", "", LocalDate.now().plusDays(1), false);
 		
 		setClassName("English");
 		setAssignment("Read");
@@ -49,6 +51,7 @@ public class Task {
 		//setDueDate(LocalDate.now());
 	}
 	//Instance variables
+	private final SimpleBooleanProperty completed;
 	
 	private final SimpleStringProperty className;
 	private final SimpleStringProperty assignment;
@@ -94,5 +97,17 @@ public class Task {
 	}
 	public final void setDueDate(final java.time.LocalDate dueDate) {
 		this.dueDateProperty().set(dueDate);
+	}
+
+	public final SimpleBooleanProperty completedProperty() {
+		return this.completed;
+	}
+
+	public final boolean isCompleted() {
+		return this.completedProperty().get();
+	}
+
+	public final void setCompleted(final boolean completed) {
+		this.completedProperty().set(completed);
 	}
 }
