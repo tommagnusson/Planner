@@ -120,13 +120,8 @@ public class ScheduleController {
 				controller.setDialogStage(dialogStage);
 				controller.setCourse(courseTable.getSelectionModel().getSelectedItem());
 				
-				//ensures that the selected index stays 
-				//constant after editing
-				int currentIndex = courseTable.getSelectionModel().getSelectedIndex();
-				
 				dialogStage.showAndWait();
-				
-				courseTable.getSelectionModel().select(currentIndex);;
+
 			} catch(Exception ex) {
 				ex.printStackTrace();
 			}

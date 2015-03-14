@@ -120,15 +120,15 @@ public class EditCourseDialogController {
 	
 	@FXML
 	private boolean onSave() {
-		Course temp = new Course();
+		Course c = edit ? course: new Course();
 		if(validData()) {
-			temp.setName(courseField.getText());
-			temp.setTeacher(teacherField.getText());
-			temp.setPeriod(periodField.getText());
-			temp.setMaterials(materialsField.getText());
-			temp.setRoomNumber(roomNumberField.getText());
+			c.setName(courseField.getText());
+			c.setTeacher(teacherField.getText());
+			c.setPeriod(periodField.getText());
+			c.setMaterials(materialsField.getText());
+			c.setRoomNumber(roomNumberField.getText());
 			
-			temp.setLunchWave(lunchWaveMap.inverse().get(lunchWaveGroup.getSelectedToggle()).toString());
+			c.setLunchWave(lunchWaveMap.inverse().get(lunchWaveGroup.getSelectedToggle()).toString());
 		} else {
 			Dialogs.create()
 			.title("Fields")
@@ -137,11 +137,9 @@ public class EditCourseDialogController {
 			.showWarning();
 			return false;
 		}
-		if(edit) {
-			//to avoid adding a copy of the edited course
-			AppData.getMasterCourseList().remove(course);
-		}
-		AppData.getMasterCourseList().add(temp);
+		//prevents duplication
+		if(!edit) AppData.getMasterCourseList().add(c);
+		
 		saveClicked = true;
 		dialogStage.close();
 		try {
