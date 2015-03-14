@@ -9,7 +9,7 @@ import javafx.beans.property.SimpleStringProperty;
  * JavaFX in order to change and update data (for ObservableLists, etc)
  * data needs to be stored in properties
  */
-public class Course {
+public class Course extends AbstractPlannerObject {
 	
 	//Constructors
 	public Course(String name, String teacher, String roomNumber, String period, String materials, String lunchWave) {

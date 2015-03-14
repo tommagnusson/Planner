@@ -156,7 +156,6 @@ public class BaseController {
 	@FXML
 	private void onAddCourse() {
 		try {
-			System.out.println("ON ADD COURSE CALLED");
 			//Load XML
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(App.class.getResource("view/dialogs/EditCourseDialog.fxml"));

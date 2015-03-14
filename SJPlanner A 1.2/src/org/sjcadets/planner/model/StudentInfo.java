@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  */
 @XmlRootElement
-public class StudentInfo{
+public class StudentInfo extends AbstractPlannerObject{
 	
 	private final SimpleStringProperty firstName;
 	private final SimpleStringProperty lastName;

@@ -54,6 +54,10 @@ public class EditCourseDialogController {
 	private Stage dialogStage;
 	private boolean saveClicked = false;
 	
+	//used for Edit dialog
+	private Course course;
+	private boolean edit = false;
+	
 	public void setDialogStage(Stage dialogeStage) {
 		this.dialogStage = dialogeStage;
 	}
@@ -62,8 +66,25 @@ public class EditCourseDialogController {
 		return saveClicked;
 	}
 	
+	public void setCourse(Course c) {
+		this.course = c;
+		edit = true;
+		
+		//input course info to be edited
+		courseField.setText(course.getName());
+		teacherField.setText(course.getTeacher());
+		roomNumberField.setText(course.getRoomNumber());
+		periodField.setText(course.getPeriod());
+		materialsField.setText(course.getMaterials());
+		
+		lunchWaveGroup.selectToggle(
+				lunchWaveMap.get(
+						Integer.parseInt(course.getLunchWave())));
+	}
+	
 	@FXML
 	private void initialize() {
+		
 		firstLunch.setToggleGroup(lunchWaveGroup);
 		secondLunch.setToggleGroup(lunchWaveGroup);
 		thirdLunch.setToggleGroup(lunchWaveGroup);
@@ -82,6 +103,7 @@ public class EditCourseDialogController {
 		textFieldContainer.add(roomNumberField);
 		textFieldContainer.add(periodField);
 		textFieldContainer.add(materialsField);
+			
 		
 	}
 	
@@ -114,6 +136,10 @@ public class EditCourseDialogController {
 			.message("Please input a value for each field.")
 			.showWarning();
 			return false;
+		}
+		if(edit) {
+			//to avoid adding a copy of the edited course
+			AppData.getMasterCourseList().remove(course);
 		}
 		AppData.getMasterCourseList().add(temp);
 		saveClicked = true;

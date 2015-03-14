@@ -30,6 +30,10 @@ public abstract class InputDialogController {
 		return dialogStage;
 	}
 	
+	//public void setPlannerObject(AbstractPlannerObject o) {
+	//	
+	//}
+	
 	@FXML
 	public void onCancel() {
 		dialogStage.close();

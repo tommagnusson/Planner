@@ -3,7 +3,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.Period;
 
-public class Event {
+public class Event extends AbstractPlannerObject{
 	//Instance variables
 	private String name, location;
 	private LocalDateTime start, end;

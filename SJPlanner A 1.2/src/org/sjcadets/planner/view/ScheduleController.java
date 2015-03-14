@@ -1,7 +1,6 @@
 package org.sjcadets.planner.view;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,6 +20,7 @@ import org.controlsfx.dialog.Dialogs;
 import org.sjcadets.planner.App;
 import org.sjcadets.planner.AppData;
 import org.sjcadets.planner.model.Course;
+import org.sjcadets.planner.view.dialogs.EditCourseDialogController;
 import org.sjcadets.planner.view.dialogs.EditStudentInfoDialogController;
 
 public class ScheduleController {
@@ -71,7 +71,67 @@ public class ScheduleController {
 		lunchWaveColumn.setCellValueFactory(cellData -> cellData.getValue().lunchWaveProperty());
 		
 		//init context menus (mouse right clicked on a row)
-		MenuItem deleteCourseItem = new MenuItem("Delete Course");
+		MenuItem addCourseItem = new MenuItem("Add");
+		MenuItem editCourseItem = new MenuItem("Edit");
+		MenuItem deleteCourseItem = new MenuItem("Delete");
+		
+		addCourseItem.setOnAction((ActionEvent e) -> {
+			try {
+				//Load XML
+				FXMLLoader loader = new FXMLLoader();
+				loader.setLocation(App.class.getResource("view/dialogs/EditCourseDialog.fxml"));
+				AnchorPane page = (AnchorPane) loader.load();
+				
+				//Dialog box
+				Stage dialogStage = new Stage();
+				dialogStage.setTitle("Add Course");
+				dialogStage.initModality(Modality.WINDOW_MODAL);
+				dialogStage.initOwner(schedulePane.getScene().getWindow());
+				Scene scene = new Scene(page);
+				dialogStage.setScene(scene);
+				
+				EditCourseDialogController controller = loader.getController();
+				controller.setDialogStage(dialogStage);
+				
+				dialogStage.showAndWait();
+				
+			} catch(Exception ex) {
+				ex.printStackTrace();
+			}
+			
+		});
+		
+		editCourseItem.setOnAction((ActionEvent e) -> {
+			try{
+				//Load XML
+				FXMLLoader loader = new FXMLLoader();
+				loader.setLocation(App.class.getResource("view/dialogs/EditCourseDialog.fxml"));
+				AnchorPane page = (AnchorPane) loader.load();
+				
+				//Dialog box
+				Stage dialogStage = new Stage();
+				dialogStage.setTitle("Edit Course");
+				dialogStage.initModality(Modality.WINDOW_MODAL);
+				dialogStage.initOwner(schedulePane.getScene().getWindow());
+				Scene scene = new Scene(page);
+				dialogStage.setScene(scene);
+				
+				EditCourseDialogController controller = loader.getController();
+				controller.setDialogStage(dialogStage);
+				controller.setCourse(courseTable.getSelectionModel().getSelectedItem());
+				
+				//ensures that the selected index stays 
+				//constant after editing
+				int currentIndex = courseTable.getSelectionModel().getSelectedIndex();
+				
+				dialogStage.showAndWait();
+				
+				courseTable.getSelectionModel().select(currentIndex);;
+			} catch(Exception ex) {
+				ex.printStackTrace();
+			}
+		});
+		
 		deleteCourseItem.setOnAction((ActionEvent e) -> {
 		    	
 		    	//"Are you sure?" dialog
@@ -88,6 +148,13 @@ public class ScheduleController {
 		});
 		final ContextMenu contextMenu = new ContextMenu();
 		courseTable.setContextMenu(contextMenu);
+		
+		//right click options
+			// "Add"
+			// "Edit"
+			// "Delete"
+		contextMenu.getItems().add(addCourseItem);
+		contextMenu.getItems().add(editCourseItem);
 		contextMenu.getItems().add(deleteCourseItem);
 	}
 

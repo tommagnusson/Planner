@@ -24,7 +24,7 @@ import org.sjcadets.planner.model.xml.LocalDateAdapter;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class Task {
+public class Task extends AbstractPlannerObject {
 	//constructors
 	
 	//complete constructor
