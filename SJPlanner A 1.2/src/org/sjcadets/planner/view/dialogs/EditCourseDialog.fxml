@@ -32,12 +32,6 @@
             <TextField fx:id="materialsField" promptText="Textbook, paper, pen" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <HBox layoutX="229.0" layoutY="252.0" spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
-         <children>
-            <Button fx:id="saveButton" layoutX="229.0" layoutY="252.0" mnemonicParsing="false" onAction="#onSave" text="Save" />
-            <Button fx:id="cancelButton" layoutX="302.0" layoutY="252.0" mnemonicParsing="false" onAction="#onCancel" text="Cancel" />
-         </children>
-      </HBox>
       <HBox layoutX="10.0" layoutY="259.0" spacing="10.0">
          <children>
             <Label layoutX="10.0" layoutY="259.0" text="Lunch Wave" />
@@ -45,6 +39,12 @@
             <RadioButton fx:id="secondLunch" layoutX="103.0" layoutY="259.0" mnemonicParsing="false" text="2" />
             <RadioButton fx:id="thirdLunch" layoutX="131.0" layoutY="259.0" mnemonicParsing="false" text="3" />
             <RadioButton fx:id="fourthLunch" layoutX="159.0" layoutY="259.0" mnemonicParsing="false" text="4" />
+         </children>
+      </HBox>
+      <HBox layoutX="229.0" layoutY="252.0" spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+         <children>
+            <Button fx:id="saveButton" layoutX="229.0" layoutY="252.0" mnemonicParsing="false" onAction="#onSave" text="Save" />
+            <Button fx:id="cancelButton" layoutX="302.0" layoutY="252.0" mnemonicParsing="false" onAction="#onCancel" text="Cancel" />
          </children>
       </HBox>
    </children>

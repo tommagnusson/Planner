@@ -20,8 +20,11 @@ import org.controlsfx.dialog.Dialogs;
 import org.sjcadets.planner.App;
 import org.sjcadets.planner.AppData;
 import org.sjcadets.planner.model.Course;
+import org.sjcadets.planner.model.PlannerObjectEnum;
+import org.sjcadets.planner.view.dialogs.DialogMode;
 import org.sjcadets.planner.view.dialogs.EditCourseDialogController;
 import org.sjcadets.planner.view.dialogs.EditStudentInfoDialogController;
+import org.sjcadets.planner.view.dialogs.InputDialogs;
 
 public class ScheduleController {
 	
@@ -35,20 +38,13 @@ public class ScheduleController {
 	
 	@FXML AnchorPane schedulePane;
 	
-	@FXML
-	TableView<Course> courseTable;
-	@FXML
-	TableColumn<Course, String> classNameColumn;
-	@FXML
-	TableColumn<Course, String> teacherColumn;
-	@FXML
-	TableColumn<Course, String> roomColumn;
-	@FXML
-	TableColumn<Course, String> periodColumn;
-	@FXML
-	TableColumn<Course, String> materialsColumn;
-	@FXML
-	TableColumn<Course, String> lunchWaveColumn;
+	@FXML TableView<Course> courseTable;
+	@FXML TableColumn<Course, String> classNameColumn;
+	@FXML TableColumn<Course, String> teacherColumn;
+	@FXML TableColumn<Course, String> roomColumn;
+	@FXML TableColumn<Course, String> periodColumn;
+	@FXML TableColumn<Course, String> materialsColumn;
+	@FXML TableColumn<Course, String> lunchWaveColumn;
 	
 	@FXML Button editStudentInfo;
 	
@@ -76,29 +72,9 @@ public class ScheduleController {
 		MenuItem deleteCourseItem = new MenuItem("Delete");
 		
 		addCourseItem.setOnAction((ActionEvent e) -> {
-			try {
-				//Load XML
-				FXMLLoader loader = new FXMLLoader();
-				loader.setLocation(App.class.getResource("view/dialogs/EditCourseDialog.fxml"));
-				AnchorPane page = (AnchorPane) loader.load();
-				
-				//Dialog box
-				Stage dialogStage = new Stage();
-				dialogStage.setTitle("Add Course");
-				dialogStage.initModality(Modality.WINDOW_MODAL);
-				dialogStage.initOwner(schedulePane.getScene().getWindow());
-				Scene scene = new Scene(page);
-				dialogStage.setScene(scene);
-				
-				EditCourseDialogController controller = loader.getController();
-				controller.setDialogStage(dialogStage);
-				
-				dialogStage.showAndWait();
-				
-			} catch(Exception ex) {
-				ex.printStackTrace();
-			}
-			
+			InputDialogs dialog = new InputDialogs(PlannerObjectEnum.COURSE,
+					DialogMode.ADD, schedulePane.getScene().getWindow());
+			dialog.popUp();
 		});
 		
 		editCourseItem.setOnAction((ActionEvent e) -> {

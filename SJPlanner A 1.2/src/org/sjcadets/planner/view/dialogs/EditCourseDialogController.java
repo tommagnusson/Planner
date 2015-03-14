@@ -8,15 +8,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 import javax.xml.bind.JAXBException;
 
-import org.controlsfx.control.action.Action;
-import org.controlsfx.dialog.Dialog.Actions;
 import org.controlsfx.dialog.Dialogs;
 import org.sjcadets.planner.AppData;
 import org.sjcadets.planner.model.Course;
@@ -24,7 +21,7 @@ import org.sjcadets.planner.model.Course;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
-public class EditCourseDialogController {
+public class EditCourseDialogController extends InputDialogController{
 	
 	//TextFields
 	
@@ -119,9 +116,17 @@ public class EditCourseDialogController {
 			});
 		}
 	
+		//enter support for button
+		saveButton.setOnKeyPressed((event) -> {
+			if(event.getCode() == KeyCode.ENTER) {
+				onSave();
+			}
+		});
+		
 	}
 	
-	private boolean validData() {
+	@Override
+	public boolean validFields() {
 		for(TextField tf: textFieldContainer) {
 			if(tf.getText() == null || tf.getText().equals("")) {
 				return false;
@@ -133,9 +138,10 @@ public class EditCourseDialogController {
 	//Event Handling Methods
 	
 	@FXML
-	private boolean onSave() {
+	@Override
+	public void onSave() {
 		Course c = edit ? course : new Course();
-		if(validData()) {
+		if(validFields()) {
 			c.setName(courseField.getText());
 			c.setTeacher(teacherField.getText());
 			c.setPeriod(periodField.getText());
@@ -149,7 +155,6 @@ public class EditCourseDialogController {
 			.masthead("Incorrect Fields")
 			.message("Please input a value for each field.")
 			.showWarning();
-			return false;
 		}
 		//prevents duplication
 		if(!edit) AppData.getMasterCourseList().add(c);
@@ -175,11 +180,11 @@ public class EditCourseDialogController {
 			
 			e.printStackTrace();
 		}
-		return saveClicked;
 	}
 	
 	@FXML
-	private void onCancel() {
+	public void onCancel() {
 		dialogStage.close();
 	}
+
 }

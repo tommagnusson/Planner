@@ -14,14 +14,12 @@ import org.sjcadets.planner.AppData;
 import org.sjcadets.planner.model.Task;
 
 public class EditTaskDialogController {
-	@FXML
-	TextField assignmentField;
-	@FXML
-	TextField courseField;
-	@FXML
-	TextField descriptionField;
-	@FXML
-	DatePicker dueDatePicker;
+	
+	@FXML TextField assignmentField;
+	@FXML TextField courseField;
+	@FXML TextField descriptionField;
+	
+	@FXML DatePicker dueDatePicker;
 	
 	private Stage dialogStage;
 	private boolean saveClicked = false;
