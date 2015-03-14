@@ -11,7 +11,8 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 import org.sjcadets.planner.App;
-import org.sjcadets.planner.model.PlannerObjectEnum;
+import org.sjcadets.planner.model.AbstractPlannerObject;
+import org.sjcadets.planner.model.Course;
 
 /**
  * Call either {@code showAddDialog} or {@code showEditDialog}
@@ -19,27 +20,16 @@ import org.sjcadets.planner.model.PlannerObjectEnum;
  * @author Tommy
  *
  */
-public class InputDialogs<T> {
+public class InputDialogs<T extends AbstractPlannerObject, S extends InputDialogController> {
 	
+	private T plannerObject;
 	private DialogMode mode;
-	private PlannerObjectEnum objectType;
 	private Window owner;
-	
-	public Object getPlannerObject() {
-		if()
-		return plannerObject;
-	}
-
-	public void setPlannerObject(Object plannerObject) {
-		this.plannerObject = plannerObject;
-	}
-
-	private Object plannerObject;
 	
 	private static final URL COURSE_DIALOG_FXML = App.class.getResource("view/dialogs/EditCourseDialog.fxml");
 	
-	public InputDialogs(PlannerObjectEnum obj, DialogMode mode, Window owner) {
-		this.object = obj;
+	public InputDialogs(T obj, DialogMode mode, Window owner) {
+		this.plannerObject = obj;
 		this.mode = mode;
 		this.owner = owner;
 	}
@@ -48,26 +38,37 @@ public class InputDialogs<T> {
 	 * Pops up a dialog based on the mode
 	 * and object set.
 	 */
-	public InputDialogController popUp() {
-		if(mode == DialogMode.ADD) {
-			if(object == PlannerObjectEnum.COURSE)
+	public S popUp() {
+		switch(mode) {
+		case ADD:
+			if(plannerObject instanceof Course) {
 				return showAddCourse();
-			
-		} else if(mode == DialogMode.EDIT) {
-			if(object == PlannerObjectEnum.COURSE) {
-				return showEditCourse();
 			}
+			break;
+		case EDIT:
+			if(plannerObject instanceof Course) {
+				System.out.println("edit");
+				return showEditCourse((Course) plannerObject);
+			}
+			break;
+		default:
+			break;
+		
 		}
+
 		return null;
 	}
 	
-	private InputDialogController showAddCourse() {
-		return loadAndShow(COURSE_DIALOG_FXML);
+	private S showAddCourse() {
+		return loadAndShow(COURSE_DIALOG_FXML, "Add Course");
 		 
 	}
 	
-	private InputDialogController showEditCourse(Course c) {
-		EditCourseDialogController controller = (EditCourseDialogController) loadAndShow(COURSE_DIALOG_FXML);
+	private S showEditCourse(Course c) {
+		S returnController = loadAndShow(COURSE_DIALOG_FXML, "Edit Course");
+		EditCourseDialogController controller = (EditCourseDialogController) returnController;
+		controller.setCourse(c);
+		return returnController;
 	}
 	
 	/**
@@ -75,7 +76,7 @@ public class InputDialogs<T> {
 	 * must cast to the appropriate controller.
 	 * @return InputDialogController of the FXML document
 	 */
-	private InputDialogController loadAndShow(URL resource) {
+	private S loadAndShow(URL resource, String title) {
 		try {
 			//Load XML
 			FXMLLoader loader = new FXMLLoader();
@@ -84,16 +85,16 @@ public class InputDialogs<T> {
 			
 			//Dialog box
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Edit Course");
+			dialogStage.setTitle(title);
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(owner);
 			Scene scene = new Scene(page);
 			dialogStage.setScene(scene);
 			
-			InputDialogController controller = loader.getController();
+			S controller = loader.getController();
 			controller.setDialogStage(dialogStage);
 			
-			dialogStage.showAndWait();
+			dialogStage.show();
 			return controller;
 		} catch (IOException e) {
 			e.printStackTrace();

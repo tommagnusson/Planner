@@ -19,11 +19,12 @@ import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 import org.sjcadets.planner.App;
 import org.sjcadets.planner.AppData;
+import org.sjcadets.planner.model.AbstractPlannerObject;
 import org.sjcadets.planner.model.Course;
-import org.sjcadets.planner.model.PlannerObjectEnum;
 import org.sjcadets.planner.view.dialogs.DialogMode;
 import org.sjcadets.planner.view.dialogs.EditCourseDialogController;
 import org.sjcadets.planner.view.dialogs.EditStudentInfoDialogController;
+import org.sjcadets.planner.view.dialogs.InputDialogController;
 import org.sjcadets.planner.view.dialogs.InputDialogs;
 
 public class ScheduleController {
@@ -72,8 +73,8 @@ public class ScheduleController {
 		MenuItem deleteCourseItem = new MenuItem("Delete");
 		
 		addCourseItem.setOnAction((ActionEvent e) -> {
-			InputDialogs dialog = new InputDialogs(PlannerObjectEnum.COURSE,
-					DialogMode.ADD, schedulePane.getScene().getWindow());
+			InputDialogs<AbstractPlannerObject, InputDialogController> dialog = new InputDialogs<AbstractPlannerObject, InputDialogController>(
+					new Course(), DialogMode.ADD, schedulePane.getScene().getWindow());
 			dialog.popUp();
 		});
 		
@@ -81,29 +82,10 @@ public class ScheduleController {
 			
 			//make sure a selection has been made
 			if(courseTable.getSelectionModel().getSelectedIndex() > 0) {
-				try{
-					//Load XML
-					FXMLLoader loader = new FXMLLoader();
-					loader.setLocation(App.class.getResource("view/dialogs/EditCourseDialog.fxml"));
-					AnchorPane page = (AnchorPane) loader.load();
-					
-					//Dialog box
-					Stage dialogStage = new Stage();
-					dialogStage.setTitle("Edit Course");
-					dialogStage.initModality(Modality.WINDOW_MODAL);
-					dialogStage.initOwner(schedulePane.getScene().getWindow());
-					Scene scene = new Scene(page);
-					dialogStage.setScene(scene);
-					
-					EditCourseDialogController controller = loader.getController();
-					controller.setDialogStage(dialogStage);
-					controller.setCourse(courseTable.getSelectionModel().getSelectedItem());
-					
-					dialogStage.showAndWait();
-	
-				} catch(Exception ex) {
-					ex.printStackTrace();
-				}
+				InputDialogs<AbstractPlannerObject, InputDialogController> dialog = new InputDialogs<AbstractPlannerObject, InputDialogController>(
+						courseTable.getSelectionModel().getSelectedItem(), DialogMode.EDIT,
+						schedulePane.getScene().getWindow());
+				dialog.popUp();
 			}
 		});
 		

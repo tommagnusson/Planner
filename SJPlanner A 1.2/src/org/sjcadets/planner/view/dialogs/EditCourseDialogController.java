@@ -21,7 +21,7 @@ import org.sjcadets.planner.model.Course;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
-public class EditCourseDialogController extends InputDialogController{
+public class EditCourseDialogController extends InputDialogController {
 	
 	//TextFields
 	
