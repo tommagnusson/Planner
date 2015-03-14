@@ -8,11 +8,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 import javax.xml.bind.JAXBException;
 
+import org.controlsfx.control.action.Action;
+import org.controlsfx.dialog.Dialog.Actions;
 import org.controlsfx.dialog.Dialogs;
 import org.sjcadets.planner.AppData;
 import org.sjcadets.planner.model.Course;
@@ -104,7 +108,17 @@ public class EditCourseDialogController {
 		textFieldContainer.add(periodField);
 		textFieldContainer.add(materialsField);
 			
-		
+		//if user presses enter on a radio button, toggle it
+		for(int i = 0; i < 4; i++) {
+			RadioButton rb = lunchWaveMap.get(i+1);
+			rb.setOnKeyPressed((event) -> {
+				if(event.getCode() == KeyCode.ENTER){
+					//toggle button
+					rb.setSelected(rb.isSelected() ? false : true);
+				}
+			});
+		}
+	
 	}
 	
 	private boolean validData() {
@@ -120,7 +134,7 @@ public class EditCourseDialogController {
 	
 	@FXML
 	private boolean onSave() {
-		Course c = edit ? course: new Course();
+		Course c = edit ? course : new Course();
 		if(validData()) {
 			c.setName(courseField.getText());
 			c.setTeacher(teacherField.getText());

@@ -102,28 +102,32 @@ public class ScheduleController {
 		});
 		
 		editCourseItem.setOnAction((ActionEvent e) -> {
-			try{
-				//Load XML
-				FXMLLoader loader = new FXMLLoader();
-				loader.setLocation(App.class.getResource("view/dialogs/EditCourseDialog.fxml"));
-				AnchorPane page = (AnchorPane) loader.load();
-				
-				//Dialog box
-				Stage dialogStage = new Stage();
-				dialogStage.setTitle("Edit Course");
-				dialogStage.initModality(Modality.WINDOW_MODAL);
-				dialogStage.initOwner(schedulePane.getScene().getWindow());
-				Scene scene = new Scene(page);
-				dialogStage.setScene(scene);
-				
-				EditCourseDialogController controller = loader.getController();
-				controller.setDialogStage(dialogStage);
-				controller.setCourse(courseTable.getSelectionModel().getSelectedItem());
-				
-				dialogStage.showAndWait();
-
-			} catch(Exception ex) {
-				ex.printStackTrace();
+			
+			//make sure a selection has been made
+			if(courseTable.getSelectionModel().getSelectedIndex() > 0) {
+				try{
+					//Load XML
+					FXMLLoader loader = new FXMLLoader();
+					loader.setLocation(App.class.getResource("view/dialogs/EditCourseDialog.fxml"));
+					AnchorPane page = (AnchorPane) loader.load();
+					
+					//Dialog box
+					Stage dialogStage = new Stage();
+					dialogStage.setTitle("Edit Course");
+					dialogStage.initModality(Modality.WINDOW_MODAL);
+					dialogStage.initOwner(schedulePane.getScene().getWindow());
+					Scene scene = new Scene(page);
+					dialogStage.setScene(scene);
+					
+					EditCourseDialogController controller = loader.getController();
+					controller.setDialogStage(dialogStage);
+					controller.setCourse(courseTable.getSelectionModel().getSelectedItem());
+					
+					dialogStage.showAndWait();
+	
+				} catch(Exception ex) {
+					ex.printStackTrace();
+				}
 			}
 		});
 		
@@ -145,30 +149,19 @@ public class ScheduleController {
 		courseTable.setContextMenu(contextMenu);
 		
 		//right click options
-			// "Add"
-			// "Edit"
-			// "Delete"
-		contextMenu.getItems().add(addCourseItem);
-		contextMenu.getItems().add(editCourseItem);
-		contextMenu.getItems().add(deleteCourseItem);
+		contextMenu.getItems().add(addCourseItem); //"Add"
+		contextMenu.getItems().add(editCourseItem); //"Edit"
+		contextMenu.getItems().add(deleteCourseItem); //"Delete"
 	}
 
 	private void initStudentInfoLabels() {
-		//check if the AppData has any information for the masterStudentInfo
-		//if not..
-		//	set the labels to ""
-		//if so...
-		//	update the labels with the relevant information
-		//attach an observer to the masterStudentInfo to track changes...
-		
-		//if the masterStudentInfo does not have any information...
 		bindLabels();
 	}
 	
 	private void bindLabels() {
 		counselorLabel.textProperty().bind(AppData.getMasterStudentInfo().counselorProperty());
 		lockerNumberLabel.textProperty().bind(AppData.getMasterStudentInfo().lockerNumberProperty());
-		lockerFirstLabel.textProperty().bind(AppData.getMasterStudentInfo().lockerFirstProperty());
+			lockerFirstLabel.textProperty().bind(AppData.getMasterStudentInfo().lockerFirstProperty());
 			lockerSecondLabel.textProperty().bind(AppData.getMasterStudentInfo().lockerSecondProperty());
 			lockerThirdLabel.textProperty().bind(AppData.getMasterStudentInfo().lockerThirdProperty());
 		homeroomLabel.textProperty().bind(AppData.getMasterStudentInfo().homeRoomProperty());
