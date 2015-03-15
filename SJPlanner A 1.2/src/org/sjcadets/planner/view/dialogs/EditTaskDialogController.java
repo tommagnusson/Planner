@@ -13,13 +13,17 @@ import org.controlsfx.dialog.Dialogs;
 import org.sjcadets.planner.AppData;
 import org.sjcadets.planner.model.Task;
 
-public class EditTaskDialogController {
+public class EditTaskDialogController extends InputDialogController {
 	
 	@FXML TextField assignmentField;
 	@FXML TextField courseField;
 	@FXML TextField descriptionField;
 	
 	@FXML DatePicker dueDatePicker;
+	
+	//For edit
+	private Task task;
+	private boolean edit = false;
 	
 	private Stage dialogStage;
 	private boolean saveClicked = false;
@@ -32,11 +36,25 @@ public class EditTaskDialogController {
 		return saveClicked;
 	}
 	
+	public void setTask(Task t) {
+		this.task = t;
+		edit = true;
+		
+		assignmentField.setText(task.getAssignment());
+		courseField.setText(task.getClassName());
+		descriptionField.setText(task.getDescription());
+		dueDatePicker.setValue(task.getDueDate());
+	}
+	
+	public Task getTask() {
+		return this.task;
+	}
+	
 	/**
 	 * Tests if the fields are valid in order to save.
 	 * @return true if fields contain values.
 	 */
-	private boolean validFields() {
+	public boolean validFields() {
 		if(assignmentField.getText() == null || assignmentField.getText().equals("")) {
 			return false;
 		}
@@ -55,8 +73,8 @@ public class EditTaskDialogController {
 	//Event handle methods
 	
 	@FXML
-	public boolean onSave() throws FileNotFoundException, JAXBException {
-		Task tempTask = new Task();
+	public void onSave() {
+		Task tempTask = edit ? task : new Task();
 		if(validFields()) {
 			tempTask.setAssignment(assignmentField.getText());
 			tempTask.setClassName(courseField.getText());
@@ -68,13 +86,17 @@ public class EditTaskDialogController {
 			.masthead("Incorrect Fields")
 			.message("Please input a value for each field.")
 			.showWarning();
-			return false;
 		}
-		AppData.getMasterTaskList().add(tempTask);
-		AppData.save();
+		if(!edit) AppData.getMasterTaskList().add(tempTask);
+		try {
+			AppData.save();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
 		saveClicked = true;
 		dialogStage.close();
-		return saveClicked;
 	}
 	
 	@FXML

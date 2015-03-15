@@ -13,6 +13,7 @@ import javafx.stage.Window;
 import org.sjcadets.planner.App;
 import org.sjcadets.planner.model.AbstractPlannerObject;
 import org.sjcadets.planner.model.Course;
+import org.sjcadets.planner.model.Task;
 
 /**
  * Call either {@code showAddDialog} or {@code showEditDialog}
@@ -27,6 +28,7 @@ public class InputDialogs<T extends AbstractPlannerObject, S extends InputDialog
 	private Window owner;
 	
 	private static final URL COURSE_DIALOG_FXML = App.class.getResource("view/dialogs/EditCourseDialog.fxml");
+	private static final URL TASK_DIALOG_FXML = App.class.getResource("view/dialogs/EditTaskDialog.fxml");
 	
 	public InputDialogs(T obj, DialogMode mode, Window owner) {
 		this.plannerObject = obj;
@@ -44,11 +46,16 @@ public class InputDialogs<T extends AbstractPlannerObject, S extends InputDialog
 			if(plannerObject instanceof Course) {
 				return showAddCourse();
 			}
+			if(plannerObject instanceof Task) {
+				return showAddTask();
+			}
 			break;
 		case EDIT:
 			if(plannerObject instanceof Course) {
-				System.out.println("edit");
 				return showEditCourse((Course) plannerObject);
+			}
+			if(plannerObject instanceof Task) {
+				return showEditTask((Task) plannerObject);
 			}
 			break;
 		default:
@@ -68,6 +75,17 @@ public class InputDialogs<T extends AbstractPlannerObject, S extends InputDialog
 		S returnController = loadAndShow(COURSE_DIALOG_FXML, "Edit Course");
 		EditCourseDialogController controller = (EditCourseDialogController) returnController;
 		controller.setCourse(c);
+		return returnController;
+	}
+	
+	private S showAddTask() {
+		return loadAndShow(TASK_DIALOG_FXML, "Add Task");
+	}
+	
+	private S showEditTask(Task t) {
+		S returnController = loadAndShow(TASK_DIALOG_FXML, "Edit Task");
+		EditTaskDialogController controller = (EditTaskDialogController) returnController;
+		controller.setTask(t);
 		return returnController;
 	}
 	

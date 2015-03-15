@@ -8,13 +8,21 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 
+import org.controlsfx.control.action.Action;
+import org.controlsfx.dialog.Dialog;
+import org.controlsfx.dialog.Dialogs;
 import org.sjcadets.planner.AppData;
 import org.sjcadets.planner.model.Task;
+import org.sjcadets.planner.view.dialogs.DialogMode;
+import org.sjcadets.planner.view.dialogs.EditTaskDialogController;
+import org.sjcadets.planner.view.dialogs.InputDialogs;
 
 /**
  * Controller class for the home view.
@@ -22,28 +30,19 @@ import org.sjcadets.planner.model.Task;
  *
  */
 public class HomeController {
-	@FXML
-	AnchorPane homeAnchorPane; //root anchor pane
-	@FXML
-	Label todayDate; //Top left above today lists
+	@FXML AnchorPane homeAnchorPane; //root anchor pane
+	@FXML Label todayDate; //Top left above today lists
 	
 	//Task Table top left
-	@FXML
-	TableView<Task> tomorrowTaskTableView;
-	@FXML
-	TableColumn<Task, String> tomorrowTaskAssignmentColumn;
-	@FXML
-	TableColumn<Task, String> tomorrowTaskClassColumn;
+	@FXML TableView<Task> tomorrowTaskTableView;
+	@FXML TableColumn<Task, String> tomorrowTaskAssignmentColumn;
+	@FXML TableColumn<Task, String> tomorrowTaskClassColumn;
 	
 	//Task info section top right
-	@FXML
-	Label classNameLabel;
-	@FXML
-	Label assignmentLabel;
-	@FXML
-	Label descriptionLabel;
-	@FXML
-	Label dueDateLabel;
+	@FXML Label classNameLabel;
+	@FXML Label assignmentLabel;
+	@FXML Label descriptionLabel;
+	@FXML Label dueDateLabel;
 	
 	ObservableList<Task> masterTaskList;
 	
@@ -103,6 +102,49 @@ public class HomeController {
 		//Attempt at lambda
 		//masterTaskList.addListener( (change<ObservableList<Task>>) -> tomorrowTaskTableView.setItems(FXCollections.observableArrayList(change.getList())));
 	}
+	
+	private void initTaskTableContextMenu() {
+		final ContextMenu contextMenu = new ContextMenu();
+		
+		MenuItem addTaskItem = new MenuItem("Add");
+		MenuItem editTaskItem = new MenuItem("Edit");
+		MenuItem deleteTaskItem = new MenuItem("Delete");
+		
+		addTaskItem.setOnAction((event) -> {
+			
+			InputDialogs<Task, EditTaskDialogController> dialog = new InputDialogs<Task, EditTaskDialogController>(
+					new Task(), DialogMode.ADD, homeAnchorPane.getScene().getWindow());
+			dialog.popUp();
+		});
+		
+		editTaskItem.setOnAction((event) -> {
+			if(tomorrowTaskTableView.getSelectionModel().getSelectedIndex() >= 0) {
+				InputDialogs<Task, EditTaskDialogController> dialog = new InputDialogs<Task, EditTaskDialogController>(
+					tomorrowTaskTableView.getSelectionModel().getSelectedItem(), DialogMode.EDIT, homeAnchorPane.getScene().getWindow());
+				EditTaskDialogController controller = (EditTaskDialogController) dialog.popUp();
+			} //else nothing selected
+		});
+		
+		deleteTaskItem.setOnAction((event) -> {
+			if(tomorrowTaskTableView.getSelectionModel().getSelectedIndex() >= 0) {
+				Action delete = Dialogs.create().title("Delete Task")
+	    			.masthead("Are you sure?")
+	    			.message("Delete this Task?").showConfirm();
+				if(delete == Dialog.Actions.YES) {
+					//delete course
+					Task toBeDeleted = tomorrowTaskTableView.getSelectionModel().getSelectedItem();
+					AppData.getMasterTaskList().remove(toBeDeleted);
+					try {AppData.save();} catch(Exception ex) {ex.printStackTrace();}
+				}
+			} //else nothing selected
+		});
+		
+		contextMenu.getItems().add(addTaskItem);
+		contextMenu.getItems().add(editTaskItem);
+		contextMenu.getItems().add(deleteTaskItem);
+		
+		tomorrowTaskTableView.setContextMenu(contextMenu);
+	}
 
 	/**
 	 * Refreshes the task labels in the top right side
@@ -115,6 +157,9 @@ public class HomeController {
 	 * displayed.
 	 */
 	private void refreshTaskLabels(Task newValue) {
+		
+		//TODO BUG not refreshing after right click options
+		
 		if(newValue == null) {
 			classNameLabel.setText("");
 			assignmentLabel.setText("");
@@ -140,5 +185,6 @@ public class HomeController {
 		refreshTaskLabels(null); //set task labels blank
 		initDateLabels(); //set date for today
 		initTomorrowTaskTableView();
+		initTaskTableContextMenu();
 	}
 }
