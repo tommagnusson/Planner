@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sjcadets.planner.view.dialogs.EditCourseDialogController">
+<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sjcadets.planner.view.dialogs.CourseDialogController">
    <children>
       <GridPane fx:id="textFieldContainer" hgap="20.0" layoutX="100.0" layoutY="60.0" vgap="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
         <columnConstraints>

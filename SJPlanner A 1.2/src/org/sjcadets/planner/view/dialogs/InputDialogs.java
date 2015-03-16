@@ -73,7 +73,7 @@ public class InputDialogs<T extends AbstractPlannerObject, S extends InputDialog
 	
 	private S showEditCourse(Course c) {
 		S returnController = loadAndShow(COURSE_DIALOG_FXML, "Edit Course");
-		EditCourseDialogController controller = (EditCourseDialogController) returnController;
+		CourseDialogController controller = (CourseDialogController) returnController;
 		controller.setCourse(c);
 		return returnController;
 	}
@@ -84,7 +84,7 @@ public class InputDialogs<T extends AbstractPlannerObject, S extends InputDialog
 	
 	private S showEditTask(Task t) {
 		S returnController = loadAndShow(TASK_DIALOG_FXML, "Edit Task");
-		EditTaskDialogController controller = (EditTaskDialogController) returnController;
+		TaskDialogController controller = (TaskDialogController) returnController;
 		controller.setTask(t);
 		return returnController;
 	}

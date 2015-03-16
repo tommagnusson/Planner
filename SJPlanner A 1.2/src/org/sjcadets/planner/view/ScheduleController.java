@@ -22,8 +22,8 @@ import org.sjcadets.planner.AppData;
 import org.sjcadets.planner.model.AbstractPlannerObject;
 import org.sjcadets.planner.model.Course;
 import org.sjcadets.planner.view.dialogs.DialogMode;
-import org.sjcadets.planner.view.dialogs.EditCourseDialogController;
-import org.sjcadets.planner.view.dialogs.EditStudentInfoDialogController;
+import org.sjcadets.planner.view.dialogs.CourseDialogController;
+import org.sjcadets.planner.view.dialogs.StudentInfoDialogController;
 import org.sjcadets.planner.view.dialogs.InputDialogController;
 import org.sjcadets.planner.view.dialogs.InputDialogs;
 
@@ -141,7 +141,7 @@ public class ScheduleController {
 			Scene scene = new Scene(page);
 			dialogStage.setScene(scene);
 			
-			EditStudentInfoDialogController controller = loader.getController();
+			StudentInfoDialogController controller = loader.getController();
 			
 			controller.setDialogStage(dialogStage);
 			

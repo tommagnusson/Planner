@@ -12,10 +12,10 @@ import javafx.stage.Stage;
 
 import org.controlsfx.dialog.Dialogs;
 import org.sjcadets.planner.App;
-import org.sjcadets.planner.view.dialogs.EditCourseDialogController;
-import org.sjcadets.planner.view.dialogs.EditEventDialogController;
-import org.sjcadets.planner.view.dialogs.EditStudentInfoDialogController;
-import org.sjcadets.planner.view.dialogs.EditTaskDialogController;
+import org.sjcadets.planner.view.dialogs.CourseDialogController;
+import org.sjcadets.planner.view.dialogs.EventDialogController;
+import org.sjcadets.planner.view.dialogs.StudentInfoDialogController;
+import org.sjcadets.planner.view.dialogs.TaskDialogController;
 
 /**
  * Controller class for the BaseView
@@ -138,7 +138,7 @@ public class BaseController {
 			Scene scene = new Scene(page);
 			dialogStage.setScene(scene);
 			
-			EditTaskDialogController controller = loader.getController();
+			TaskDialogController controller = loader.getController();
 			
 			controller.setDialogStage(dialogStage);
 			
@@ -169,7 +169,7 @@ public class BaseController {
 			Scene scene = new Scene(page);
 			dialogStage.setScene(scene);
 			
-			EditCourseDialogController controller = loader.getController();
+			CourseDialogController controller = loader.getController();
 			
 			controller.setDialogStage(dialogStage);
 			
@@ -198,7 +198,7 @@ public class BaseController {
 			Scene scene = new Scene(page);
 			dialogStage.setScene(scene);
 			
-			EditStudentInfoDialogController controller = loader.getController();
+			StudentInfoDialogController controller = loader.getController();
 			
 			controller.setDialogStage(dialogStage);
 			
@@ -227,7 +227,7 @@ public class BaseController {
 			Scene scene = new Scene(page);
 			dialogStage.setScene(scene);
 			
-			EditEventDialogController controller = loader.getController();
+			EventDialogController controller = loader.getController();
 			
 			controller.setDialogStage(dialogStage);
 			

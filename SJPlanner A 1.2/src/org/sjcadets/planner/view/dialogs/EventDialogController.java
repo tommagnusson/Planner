@@ -24,7 +24,7 @@ import org.sjcadets.planner.model.Event;
  * @see Event
  *
  */
-public class EditEventDialogController extends InputDialogController {
+public class EventDialogController extends InputDialogController {
 
 	@FXML private TextField eventNameField;
 	@FXML private TextField locationField;

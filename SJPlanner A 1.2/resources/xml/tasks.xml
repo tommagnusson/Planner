@@ -3,31 +3,92 @@
     <task>
         <assignment>Book</assignment>
         <className>Math</className>
+        <completed>false</completed>
         <description>problems</description>
         <dueDate>2015-01-17</dueDate>
     </task>
     <task>
         <assignment>Textbook</assignment>
         <className>Religion</className>
+        <completed>false</completed>
         <description>problems</description>
         <dueDate>2015-01-17</dueDate>
     </task>
     <task>
         <assignment>Read</assignment>
         <className>English</className>
+        <completed>false</completed>
         <description>1984</description>
         <dueDate>2015-03-12</dueDate>
     </task>
     <task>
         <assignment>Terms</assignment>
         <className>History</className>
+        <completed>false</completed>
         <description>suck</description>
         <dueDate>2015-03-13</dueDate>
     </task>
     <task>
         <assignment>What</assignment>
         <className>is</className>
+        <completed>false</completed>
         <description>this</description>
         <dueDate>2015-03-12</dueDate>
+    </task>
+    <task>
+        <assignment>ASD</assignment>
+        <className>ads</className>
+        <completed>false</completed>
+        <description>asdf</description>
+        <dueDate>2015-03-04</dueDate>
+    </task>
+    <task>
+        <assignment>Frankenstien Essay</assignment>
+        <className>English</className>
+        <completed>false</completed>
+        <description>Music thing</description>
+        <dueDate>2015-03-14</dueDate>
+    </task>
+    <task>
+        <assignment>asdf</assignment>
+        <className>asdf</className>
+        <completed>false</completed>
+        <description>asdf</description>
+        <dueDate>2015-03-15</dueDate>
+    </task>
+    <task>
+        <assignment>asdf</assignment>
+        <className>qqqq</className>
+        <completed>false</completed>
+        <description>asdfasdfasdfadsf</description>
+        <dueDate>2015-03-15</dueDate>
+    </task>
+    <task>
+        <assignment>asdf</assignment>
+        <className>asdf</className>
+        <completed>false</completed>
+        <description>asdf</description>
+        <dueDate>2015-03-04</dueDate>
+    </task>
+    <task>
+        <assignment>a</assignment>
+        <className>a</className>
+        <completed>false</completed>
+        <description>a</description>
+        <dueDate>2015-03-03</dueDate>
+    </task>
+    <task>
+        <assignment>fjgk</assignment>
+        <className>ghjk</className>
+        <completed>false</completed>
+        <description>ghjk</description>
+        <dueDate>2015-03-16</dueDate>
+    </task>
+    <task>
+        <assignment>Paper</assignment>
+        <className>English</className>
+        <completed>false</completed>
+        <description>2 pages</description>
+        <dueDate>2015-03-16</dueDate>
     </task>
 </tasks>

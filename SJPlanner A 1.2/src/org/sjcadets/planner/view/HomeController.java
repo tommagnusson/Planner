@@ -21,7 +21,7 @@ import org.controlsfx.dialog.Dialogs;
 import org.sjcadets.planner.AppData;
 import org.sjcadets.planner.model.Task;
 import org.sjcadets.planner.view.dialogs.DialogMode;
-import org.sjcadets.planner.view.dialogs.EditTaskDialogController;
+import org.sjcadets.planner.view.dialogs.TaskDialogController;
 import org.sjcadets.planner.view.dialogs.InputDialogs;
 
 /**
@@ -112,16 +112,16 @@ public class HomeController {
 		
 		addTaskItem.setOnAction((event) -> {
 			
-			InputDialogs<Task, EditTaskDialogController> dialog = new InputDialogs<Task, EditTaskDialogController>(
+			InputDialogs<Task, TaskDialogController> dialog = new InputDialogs<Task, TaskDialogController>(
 					new Task(), DialogMode.ADD, homeAnchorPane.getScene().getWindow());
 			dialog.popUp();
 		});
 		
 		editTaskItem.setOnAction((event) -> {
 			if(tomorrowTaskTableView.getSelectionModel().getSelectedIndex() >= 0) {
-				InputDialogs<Task, EditTaskDialogController> dialog = new InputDialogs<Task, EditTaskDialogController>(
+				InputDialogs<Task, TaskDialogController> dialog = new InputDialogs<Task, TaskDialogController>(
 					tomorrowTaskTableView.getSelectionModel().getSelectedItem(), DialogMode.EDIT, homeAnchorPane.getScene().getWindow());
-				EditTaskDialogController controller = (EditTaskDialogController) dialog.popUp();
+				TaskDialogController controller = (TaskDialogController) dialog.popUp();
 			} //else nothing selected
 		});
 		

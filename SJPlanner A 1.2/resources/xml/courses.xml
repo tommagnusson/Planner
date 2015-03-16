@@ -1,46 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <courses>
     <course>
-        <lunchWave>1</lunchWave>
-        <materials>Textbook, Notebook</materials>
-        <name>Physics</name>
-        <period>A</period>
-        <roomNumber>311</roomNumber>
-        <teacher>Mr. Stolzenburg</teacher>
-    </course>
-    <course>
-        <lunchWave>2</lunchWave>
-        <materials>notebook</materials>
-        <name>Math</name>
-        <period>B</period>
-        <roomNumber>107</roomNumber>
-        <teacher>Mrs. Dennin</teacher>
-    </course>
-    <course>
-        <lunchWave>2</lunchWave>
-        <materials>Textbook, Workbook, iPad, Notebook</materials>
-        <name>French</name>
-        <period>C</period>
-        <roomNumber>105</roomNumber>
-        <teacher>Mme Delaplace</teacher>
-    </course>
-    <course>
-        <lunchWave>3</lunchWave>
-        <materials>iPad</materials>
-        <name>History</name>
-        <period>D</period>
-        <roomNumber>205</roomNumber>
-        <teacher>Mrs. Bowman</teacher>
-    </course>
-    <course>
-        <lunchWave>4</lunchWave>
-        <materials>Seven books</materials>
-        <name>English</name>
-        <period>E</period>
-        <roomNumber>311</roomNumber>
-        <teacher>Lowell</teacher>
-    </course>
-    <course>
         <lunchWave>4</lunchWave>
         <materials>Textbook</materials>
         <name>English</name>
@@ -52,16 +12,8 @@
         <lunchWave>4</lunchWave>
         <materials>iPad</materials>
         <name>Morality</name>
-        <period>F</period>
+        <period>G</period>
         <roomNumber>305</roomNumber>
         <teacher>Ms. Glynn</teacher>
-    </course>
-    <course>
-        <lunchWave>1</lunchWave>
-        <materials>Notebook</materials>
-        <name>Study</name>
-        <period>G</period>
-        <roomNumber>Cafeteria</roomNumber>
-        <teacher>None</teacher>
     </course>
 </courses>

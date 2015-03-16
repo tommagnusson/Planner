@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <studentInfo>
-    <counselor></counselor>
-    <firstName></firstName>
-    <homeRoom></homeRoom>
-    <lastName></lastName>
-    <lockerFirst></lockerFirst>
-    <lockerNumber></lockerNumber>
-    <lockerSecond></lockerSecond>
-    <lockerThird></lockerThird>
-    <year>OTHER</year>
+    <counselor>Mrs. Sullivan</counselor>
+    <firstName>Tommy</firstName>
+    <homeRoom>301</homeRoom>
+    <lastName>Magnusson</lastName>
+    <lockerFirst>40</lockerFirst>
+    <lockerNumber>675</lockerNumber>
+    <lockerSecond>45</lockerSecond>
+    <lockerThird>32</lockerThird>
+    <year>JUNIOR</year>
 </studentInfo>

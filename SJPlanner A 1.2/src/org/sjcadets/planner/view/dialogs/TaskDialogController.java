@@ -13,7 +13,7 @@ import org.controlsfx.dialog.Dialogs;
 import org.sjcadets.planner.AppData;
 import org.sjcadets.planner.model.Task;
 
-public class EditTaskDialogController extends InputDialogController {
+public class TaskDialogController extends InputDialogController {
 	
 	@FXML TextField assignmentField;
 	@FXML TextField courseField;

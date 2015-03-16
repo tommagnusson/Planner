@@ -1,5 +1,7 @@
 package org.sjcadets.planner.view.dialogs;
 
+import org.sjcadets.planner.view.Controller;
+
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 
@@ -18,7 +20,7 @@ import javafx.stage.Stage;
  * @author Tommy
  *
  */
-public abstract class InputDialogController {
+public abstract class InputDialogController extends Controller {
 
 	private Stage dialogStage;
 	

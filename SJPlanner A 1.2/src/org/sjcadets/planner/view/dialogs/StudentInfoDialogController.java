@@ -20,7 +20,7 @@ import org.sjcadets.planner.model.StudentInfo;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
-public class EditStudentInfoDialogController {
+public class StudentInfoDialogController {
 	//TextFields
 	
 	@FXML private TextField firstNameField;
