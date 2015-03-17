@@ -1,5 +1,6 @@
 package org.sjcadets.planner.view.dialogs;
 
+import org.sjcadets.planner.model.AbstractPlannerObject;
 import org.sjcadets.planner.view.Controller;
 
 import javafx.fxml.FXML;
@@ -21,8 +22,18 @@ import javafx.stage.Stage;
  *
  */
 public abstract class InputDialogController extends Controller {
+	
 
 	private Stage dialogStage;
+	private boolean edit = false;
+	
+	public boolean getEdit() {
+		return this.edit;
+	}
+	
+	public void setEdit(boolean edit) {
+		this.edit = edit;
+	}
 	
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
@@ -31,10 +42,7 @@ public abstract class InputDialogController extends Controller {
 	public Stage getDialogStage() {
 		return dialogStage;
 	}
-	
-	//public void setPlannerObject(AbstractPlannerObject o) {
-	//	
-	//}
+
 	
 	@FXML
 	public void onCancel() {
@@ -44,4 +52,5 @@ public abstract class InputDialogController extends Controller {
 	@FXML
 	public abstract void onSave();
 	public abstract boolean validFields();
+	public abstract void setEdit(AbstractPlannerObject apo);
 }

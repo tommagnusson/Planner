@@ -2,6 +2,7 @@ package org.sjcadets.planner.view;
 
 import java.time.LocalDate;
 
+
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -14,15 +15,19 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Window;
+
 
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 import org.sjcadets.planner.AppData;
+import org.sjcadets.planner.model.PlannerObjectType;
 import org.sjcadets.planner.model.Task;
 import org.sjcadets.planner.view.dialogs.DialogMode;
+import org.sjcadets.planner.view.dialogs.InputDialogControllerFactory;
+import org.sjcadets.planner.view.dialogs.ShowType;
 import org.sjcadets.planner.view.dialogs.TaskDialogController;
-import org.sjcadets.planner.view.dialogs.InputDialogs;
 
 /**
  * Controller class for the home view.
@@ -110,19 +115,28 @@ public class HomeController {
 		MenuItem editTaskItem = new MenuItem("Edit");
 		MenuItem deleteTaskItem = new MenuItem("Delete");
 		
+		PlannerObjectType type = PlannerObjectType.TASK;
+		ShowType show = ShowType.SHOW;
+		
+		//Window owner = ;
+		
 		addTaskItem.setOnAction((event) -> {
 			
-			InputDialogs<Task, TaskDialogController> dialog = new InputDialogs<Task, TaskDialogController>(
-					new Task(), DialogMode.ADD, homeAnchorPane.getScene().getWindow());
-			dialog.popUp();
+			InputDialogControllerFactory factory = new InputDialogControllerFactory.Builder()
+				.plannerObjectType(type).showType(show).edit(false).window(homeAnchorPane.getScene().getWindow()).build();
+			
+			factory.getControllerAndPop();
+			
 		});
 		
 		editTaskItem.setOnAction((event) -> {
-			if(tomorrowTaskTableView.getSelectionModel().getSelectedIndex() >= 0) {
-				InputDialogs<Task, TaskDialogController> dialog = new InputDialogs<Task, TaskDialogController>(
-					tomorrowTaskTableView.getSelectionModel().getSelectedItem(), DialogMode.EDIT, homeAnchorPane.getScene().getWindow());
-				TaskDialogController controller = (TaskDialogController) dialog.popUp();
-			} //else nothing selected
+			InputDialogControllerFactory factory = new InputDialogControllerFactory.Builder()
+				.plannerObjectType(type).showType(show).edit(true)
+				.plannerObject(tomorrowTaskTableView.getSelectionModel().getSelectedItem())
+				.window(homeAnchorPane.getScene().getWindow()).build();
+			
+			factory.getControllerAndPop();
+			
 		});
 		
 		deleteTaskItem.setOnAction((event) -> {

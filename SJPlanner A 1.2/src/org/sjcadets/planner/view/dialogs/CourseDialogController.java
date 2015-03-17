@@ -16,6 +16,7 @@ import javax.xml.bind.JAXBException;
 
 import org.controlsfx.dialog.Dialogs;
 import org.sjcadets.planner.AppData;
+import org.sjcadets.planner.model.AbstractPlannerObject;
 import org.sjcadets.planner.model.Course;
 
 import com.google.common.collect.BiMap;
@@ -53,21 +54,19 @@ public class CourseDialogController extends InputDialogController {
 	//Generic controller Instance variables
 	
 	private Stage dialogStage;
-	private boolean saveClicked = false;
 	
 	//used for Edit dialog
 	private Course course;
-	private boolean edit = false;
+	
+	public CourseDialogController() {
+		
+	}
 	
 	public void setDialogStage(Stage dialogeStage) {
 		this.dialogStage = dialogeStage;
 	}
 	
-	public boolean isSaveClicked() {
-		return saveClicked;
-	}
-	
-	public void setCourse(Course c) {
+	/*public void setCourse(Course c) {
 		this.course = c;
 		edit = true;
 		
@@ -81,7 +80,7 @@ public class CourseDialogController extends InputDialogController {
 		lunchWaveGroup.selectToggle(
 				lunchWaveMap.get(
 						Integer.parseInt(course.getLunchWave())));
-	}
+	}*/
 	
 	@FXML
 	private void initialize() {
@@ -140,7 +139,7 @@ public class CourseDialogController extends InputDialogController {
 	@FXML
 	@Override
 	public void onSave() {
-		Course c = edit ? course : new Course();
+		Course c = getEdit() ? course : new Course();
 		if(validFields()) {
 			c.setName(courseField.getText());
 			c.setTeacher(teacherField.getText());
@@ -157,9 +156,8 @@ public class CourseDialogController extends InputDialogController {
 			.showWarning();
 		}
 		//prevents duplication
-		if(!edit) AppData.getMasterCourseList().add(c);
+		if(!getEdit()) AppData.getMasterCourseList().add(c);
 		
-		saveClicked = true;
 		dialogStage.close();
 		try {
 			AppData.save();
@@ -185,6 +183,23 @@ public class CourseDialogController extends InputDialogController {
 	@FXML
 	public void onCancel() {
 		dialogStage.close();
+	}
+
+	@Override
+	public void setEdit(AbstractPlannerObject apo) {
+		this.course = (Course) apo;
+		setEdit(true);
+		
+		//input course info to be edited
+		courseField.setText(course.getName());
+		teacherField.setText(course.getTeacher());
+		roomNumberField.setText(course.getRoomNumber());
+		periodField.setText(course.getPeriod());
+		materialsField.setText(course.getMaterials());
+		
+		lunchWaveGroup.selectToggle(
+				lunchWaveMap.get(
+						Integer.parseInt(course.getLunchWave())));
 	}
 
 }

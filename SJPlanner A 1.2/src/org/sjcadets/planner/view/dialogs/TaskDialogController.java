@@ -11,6 +11,7 @@ import javax.xml.bind.JAXBException;
 
 import org.controlsfx.dialog.Dialogs;
 import org.sjcadets.planner.AppData;
+import org.sjcadets.planner.model.AbstractPlannerObject;
 import org.sjcadets.planner.model.Task;
 
 public class TaskDialogController extends InputDialogController {
@@ -34,16 +35,6 @@ public class TaskDialogController extends InputDialogController {
 	
 	public boolean isSaveClicked() {
 		return saveClicked;
-	}
-	
-	public void setTask(Task t) {
-		this.task = t;
-		edit = true;
-		
-		assignmentField.setText(task.getAssignment());
-		courseField.setText(task.getClassName());
-		descriptionField.setText(task.getDescription());
-		dueDatePicker.setValue(task.getDueDate());
 	}
 	
 	public Task getTask() {
@@ -102,6 +93,18 @@ public class TaskDialogController extends InputDialogController {
 	@FXML
 	public void onCancel() {
 		dialogStage.close();
+	}
+
+	@Override
+	public void setEdit(AbstractPlannerObject apo) {
+		this.task = (Task) apo;
+		edit = true;
+		
+		assignmentField.setText(task.getAssignment());
+		courseField.setText(task.getClassName());
+		descriptionField.setText(task.getDescription());
+		dueDatePicker.setValue(task.getDueDate());
+		
 	}
 	
 }

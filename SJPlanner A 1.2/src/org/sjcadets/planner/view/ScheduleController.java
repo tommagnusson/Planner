@@ -13,6 +13,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
@@ -21,11 +22,13 @@ import org.sjcadets.planner.App;
 import org.sjcadets.planner.AppData;
 import org.sjcadets.planner.model.AbstractPlannerObject;
 import org.sjcadets.planner.model.Course;
-import org.sjcadets.planner.view.dialogs.DialogMode;
+import org.sjcadets.planner.model.PlannerObjectType;
 import org.sjcadets.planner.view.dialogs.CourseDialogController;
-import org.sjcadets.planner.view.dialogs.StudentInfoDialogController;
+import org.sjcadets.planner.view.dialogs.DialogMode;
 import org.sjcadets.planner.view.dialogs.InputDialogController;
-import org.sjcadets.planner.view.dialogs.InputDialogs;
+import org.sjcadets.planner.view.dialogs.InputDialogControllerFactory;
+import org.sjcadets.planner.view.dialogs.StudentInfoDialogController;
+import org.sjcadets.planner.view.dialogs.ShowType;
 
 public class ScheduleController {
 	
@@ -72,20 +75,27 @@ public class ScheduleController {
 		MenuItem editCourseItem = new MenuItem("Edit");
 		MenuItem deleteCourseItem = new MenuItem("Delete");
 		
+		//Window owner = 
+		PlannerObjectType type = PlannerObjectType.COURSE;
+		
 		addCourseItem.setOnAction((ActionEvent e) -> {
-			InputDialogs<AbstractPlannerObject, InputDialogController> dialog = new InputDialogs<AbstractPlannerObject, InputDialogController>(
-					new Course(), DialogMode.ADD, schedulePane.getScene().getWindow());
-			dialog.popUp();
+			InputDialogControllerFactory factory = new InputDialogControllerFactory
+					.Builder().plannerObjectType(PlannerObjectType.COURSE)
+					.edit(false).showType(ShowType.SHOW)
+					.window(schedulePane.getScene().getWindow())
+					.build();
+			factory.getControllerAndPop();
 		});
 		
 		editCourseItem.setOnAction((ActionEvent e) -> {
 			
 			//make sure a selection has been made
 			if(courseTable.getSelectionModel().getSelectedIndex() > 0) {
-				InputDialogs<AbstractPlannerObject, InputDialogController> dialog = new InputDialogs<AbstractPlannerObject, InputDialogController>(
-						courseTable.getSelectionModel().getSelectedItem(), DialogMode.EDIT,
-						schedulePane.getScene().getWindow());
-				dialog.popUp();
+				InputDialogControllerFactory factory = new InputDialogControllerFactory
+						.Builder().plannerObjectType(PlannerObjectType.COURSE)
+						.edit(true).plannerObject(courseTable.getSelectionModel().getSelectedItem())
+						.showType(ShowType.SHOW).window(schedulePane.getScene().getWindow()).build();
+				factory.getControllerAndPop();
 			}
 		});
 		

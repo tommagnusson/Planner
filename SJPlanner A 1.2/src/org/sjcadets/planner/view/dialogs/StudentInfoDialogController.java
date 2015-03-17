@@ -15,12 +15,13 @@ import javax.xml.bind.JAXBException;
 
 import org.controlsfx.dialog.Dialogs;
 import org.sjcadets.planner.AppData;
+import org.sjcadets.planner.model.AbstractPlannerObject;
 import org.sjcadets.planner.model.StudentInfo;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
-public class StudentInfoDialogController {
+public class StudentInfoDialogController extends InputDialogController{
 	//TextFields
 	
 	@FXML private TextField firstNameField;
@@ -49,16 +50,12 @@ public class StudentInfoDialogController {
 
 	//Instance Variables
 	private Stage dialogStage;
-	private boolean saveClicked = false;
 	
 	
 	public void setDialogStage(Stage dialogStage){
 		this.dialogStage = dialogStage;
 	}
 
-	public boolean isSaveClicked(){
-		return saveClicked;
-	}
 	@FXML
 	public void initialize(){
 		freshman.setToggleGroup(studentYear);
@@ -98,7 +95,7 @@ public class StudentInfoDialogController {
 			studentYear.selectToggle(studentYearMap.get(AppData.getMasterStudentInfo().getYear()));
 		}
 	}
-	private boolean validData() {
+	public boolean validFields() {
 		for(TextField tf: textFieldContainer) {
 			if(tf.getText() == null || tf.getText().equals("")) {
 				return false;
@@ -107,8 +104,8 @@ public class StudentInfoDialogController {
 		return true;
 	}
 	@FXML
-	private boolean onSave() {
-		if(validData()) {	
+	public void onSave() {
+		if(validFields()) {	
 			AppData.getMasterStudentInfo().setFirstName(firstNameField.getText());
 			AppData.getMasterStudentInfo().setLastName(lastNameField.getText());
 			AppData.getMasterStudentInfo().setCounselor(counselorField.getText());
@@ -145,15 +142,14 @@ public class StudentInfoDialogController {
 			.masthead("Incorrect Fields")
 			.message("Please input a value for each field.")
 			.showWarning();
-			return false;
 		}
-		saveClicked = true;
 		dialogStage.close();
-		return saveClicked;
+	}
+
+	@Override
+	public void setEdit(AbstractPlannerObject apo) {
+		// TODO Auto-generated method stub
+		
 	}
 	
-	@FXML
-	private void onCancel() {
-		dialogStage.close();
-	}
 }

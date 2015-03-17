@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 
 import org.controlsfx.dialog.Dialogs;
 import org.sjcadets.planner.AppData;
+import org.sjcadets.planner.model.AbstractPlannerObject;
 import org.sjcadets.planner.model.Event;
 
 /**
@@ -143,5 +144,11 @@ public class EventDialogController extends InputDialogController {
 		}
 		//all fields have values
 		return true;
+	}
+
+	@Override
+	public void setEdit(AbstractPlannerObject apo) {
+		// TODO Auto-generated method stub
+		
 	}
 }
