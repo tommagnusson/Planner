@@ -9,11 +9,15 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import org.controlsfx.dialog.Dialogs;
 import org.sjcadets.planner.App;
+import org.sjcadets.planner.model.PlannerObjectType;
 import org.sjcadets.planner.view.dialogs.CourseDialogController;
 import org.sjcadets.planner.view.dialogs.EventDialogController;
+import org.sjcadets.planner.view.dialogs.InputDialogControllerFactory;
+import org.sjcadets.planner.view.dialogs.ShowType;
 import org.sjcadets.planner.view.dialogs.StudentInfoDialogController;
 import org.sjcadets.planner.view.dialogs.TaskDialogController;
 
@@ -24,28 +28,19 @@ import org.sjcadets.planner.view.dialogs.TaskDialogController;
  */
 public class BaseController {
 	
-	@FXML
-	private TabPane baseTabPane;
-	@FXML
-	private Tab homeTab;
-	@FXML
-	private Tab calendarTab;
-	@FXML
-	private Tab scheduleTab;
+	@FXML private TabPane baseTabPane;
+	@FXML private Tab homeTab;
+	@FXML private Tab calendarTab;
+	@FXML private Tab scheduleTab;
 	
-	@FXML
-	private AnchorPane homeAnchorPane;
-	@FXML
-	private AnchorPane calendarWrapper;
-	@FXML
-	private AnchorPane scheduleAnchorPane;
+	@FXML private AnchorPane homeAnchorPane;
+	@FXML private AnchorPane calendarWrapper;
+	@FXML private AnchorPane scheduleAnchorPane;
 	
-	@FXML
-	private MenuItem addTask;
-	@FXML
-	private MenuItem addCourse;
-	@FXML
-	private MenuItem addEvent;
+	@FXML private MenuItem addTask;
+	@FXML private MenuItem addCourse;
+	@FXML private MenuItem addEvent;
+	
 	
 	public BaseController() {
 		
@@ -124,27 +119,12 @@ public class BaseController {
 	private void onAddTask() {
 		
 		try {
-			//Load XML
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(App.class.getResource("view/dialogs/EditTaskDialog.fxml"));
-			AnchorPane page = (AnchorPane) loader.load();
 			
-			//Create dialog stage (new pop-up window)
-			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Edit Task");
-			//prevents the user from switching from that window
-			dialogStage.initModality(Modality.WINDOW_MODAL);
-			dialogStage.initOwner(baseTabPane.getScene().getWindow());
-			Scene scene = new Scene(page);
-			dialogStage.setScene(scene);
+			InputDialogControllerFactory factory = new InputDialogControllerFactory.Builder()
+				.plannerObjectType(PlannerObjectType.TASK).window(baseTabPane.getScene().getWindow())
+				.build();
 			
-			TaskDialogController controller = loader.getController();
-			
-			controller.setDialogStage(dialogStage);
-			
-			//show the dialog and wait until the user closes it
-			dialogStage.showAndWait();
-			
+			factory.getControllerAndPop();	
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -156,25 +136,10 @@ public class BaseController {
 	@FXML
 	private void onAddCourse() {
 		try {
-			//Load XML
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(App.class.getResource("view/dialogs/EditCourseDialog.fxml"));
-			AnchorPane page = (AnchorPane) loader.load();
+			InputDialogControllerFactory factory = new InputDialogControllerFactory.Builder()
+				.plannerObjectType(PlannerObjectType.TASK).window(baseTabPane.getScene().getWindow()).build();
 			
-			//Create dialog stage (new pop-up window)
-			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Edit Course");
-			dialogStage.initModality(Modality.WINDOW_MODAL);
-			dialogStage.initOwner(baseTabPane.getScene().getWindow());
-			Scene scene = new Scene(page);
-			dialogStage.setScene(scene);
-			
-			CourseDialogController controller = loader.getController();
-			
-			controller.setDialogStage(dialogStage);
-			
-			//show the dialog and wait until the user closes it
-			dialogStage.showAndWait();
+			factory.getControllerAndPop();
 		
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -185,25 +150,11 @@ public class BaseController {
 	@FXML
 	public void onAddStudentInfo() {
 		try {
-			//Load XML
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(App.class.getResource("view/dialogs/EditStudentInfoDialog.fxml"));
-			AnchorPane page = (AnchorPane) loader.load();
+
+			InputDialogControllerFactory factory = new InputDialogControllerFactory.Builder()
+				.plannerObjectType(PlannerObjectType.STUDENT_INFO).window(baseTabPane.getScene().getWindow()).build();
 			
-			//Create dialog stage (new pop-up window)
-			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Edit Student Info");
-			dialogStage.initModality(Modality.WINDOW_MODAL);
-			dialogStage.initOwner(baseTabPane.getScene().getWindow());
-			Scene scene = new Scene(page);
-			dialogStage.setScene(scene);
-			
-			StudentInfoDialogController controller = loader.getController();
-			
-			controller.setDialogStage(dialogStage);
-			
-			//show the dialog and wait until the user closes it
-			dialogStage.showAndWait();
+			factory.getControllerAndPop();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -214,25 +165,12 @@ public class BaseController {
 	@FXML
 	public void onAddEvent() {
 		try {
-			//Load XML
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(App.class.getResource("view/dialogs/EditEventDialog.fxml"));
-			AnchorPane page = (AnchorPane) loader.load();
 			
-			//Create dialog stage (new pop-up window)
-			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Edit Event");
-			dialogStage.initModality(Modality.WINDOW_MODAL);
-			dialogStage.initOwner(baseTabPane.getScene().getWindow());
-			Scene scene = new Scene(page);
-			dialogStage.setScene(scene);
+			InputDialogControllerFactory factory = new InputDialogControllerFactory.Builder()
+				.plannerObjectType(PlannerObjectType.EVENT).window(baseTabPane.getScene().getWindow()).build();
 			
-			EventDialogController controller = loader.getController();
+			factory.getControllerAndPop();
 			
-			controller.setDialogStage(dialogStage);
-			
-			//show the dialog and wait until the user closes it
-			dialogStage.showAndWait();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

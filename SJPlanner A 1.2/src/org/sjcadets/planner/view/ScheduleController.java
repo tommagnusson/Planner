@@ -13,22 +13,17 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 import org.sjcadets.planner.App;
 import org.sjcadets.planner.AppData;
-import org.sjcadets.planner.model.AbstractPlannerObject;
 import org.sjcadets.planner.model.Course;
 import org.sjcadets.planner.model.PlannerObjectType;
-import org.sjcadets.planner.view.dialogs.CourseDialogController;
-import org.sjcadets.planner.view.dialogs.DialogMode;
-import org.sjcadets.planner.view.dialogs.InputDialogController;
 import org.sjcadets.planner.view.dialogs.InputDialogControllerFactory;
-import org.sjcadets.planner.view.dialogs.StudentInfoDialogController;
 import org.sjcadets.planner.view.dialogs.ShowType;
+import org.sjcadets.planner.view.dialogs.StudentInfoDialogController;
 
 public class ScheduleController {
 	
@@ -81,7 +76,7 @@ public class ScheduleController {
 		addCourseItem.setOnAction((ActionEvent e) -> {
 			InputDialogControllerFactory factory = new InputDialogControllerFactory
 					.Builder().plannerObjectType(PlannerObjectType.COURSE)
-					.edit(false).showType(ShowType.SHOW)
+					.edit(false)
 					.window(schedulePane.getScene().getWindow())
 					.build();
 			factory.getControllerAndPop();
@@ -94,7 +89,7 @@ public class ScheduleController {
 				InputDialogControllerFactory factory = new InputDialogControllerFactory
 						.Builder().plannerObjectType(PlannerObjectType.COURSE)
 						.edit(true).plannerObject(courseTable.getSelectionModel().getSelectedItem())
-						.showType(ShowType.SHOW).window(schedulePane.getScene().getWindow()).build();
+						.window(schedulePane.getScene().getWindow()).build();
 				factory.getControllerAndPop();
 			}
 		});
@@ -138,25 +133,12 @@ public class ScheduleController {
 	@FXML
 	private void onEditStudentInfo() {
 		try {
-			//Load XML
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(App.class.getResource("view/dialogs/EditStudentInfoDialog.fxml"));
-			AnchorPane page = (AnchorPane) loader.load();
 			
-			//Create dialog stage (new pop-up window)
-			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Edit Student Info");
-			dialogStage.initModality(Modality.WINDOW_MODAL);
-			dialogStage.initOwner(schedulePane.getScene().getWindow());
-			Scene scene = new Scene(page);
-			dialogStage.setScene(scene);
+			InputDialogControllerFactory factory = new InputDialogControllerFactory.Builder()
+				.plannerObjectType(PlannerObjectType.STUDENT_INFO).edit(true).plannerObject(AppData.getMasterStudentInfo())
+				.window(schedulePane.getScene().getWindow()).build();
 			
-			StudentInfoDialogController controller = loader.getController();
-			
-			controller.setDialogStage(dialogStage);
-			
-			//show the dialog and wait until the user closes it
-			dialogStage.showAndWait();
+			factory.getControllerAndPop();
 			
 		} catch (Exception e) {
 			e.printStackTrace();

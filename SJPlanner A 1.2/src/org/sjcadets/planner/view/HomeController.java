@@ -2,7 +2,6 @@ package org.sjcadets.planner.view;
 
 import java.time.LocalDate;
 
-
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -15,8 +14,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Window;
-
 
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
@@ -24,10 +21,8 @@ import org.controlsfx.dialog.Dialogs;
 import org.sjcadets.planner.AppData;
 import org.sjcadets.planner.model.PlannerObjectType;
 import org.sjcadets.planner.model.Task;
-import org.sjcadets.planner.view.dialogs.DialogMode;
 import org.sjcadets.planner.view.dialogs.InputDialogControllerFactory;
 import org.sjcadets.planner.view.dialogs.ShowType;
-import org.sjcadets.planner.view.dialogs.TaskDialogController;
 
 /**
  * Controller class for the home view.
@@ -116,14 +111,13 @@ public class HomeController {
 		MenuItem deleteTaskItem = new MenuItem("Delete");
 		
 		PlannerObjectType type = PlannerObjectType.TASK;
-		ShowType show = ShowType.SHOW;
 		
 		//Window owner = ;
 		
 		addTaskItem.setOnAction((event) -> {
 			
 			InputDialogControllerFactory factory = new InputDialogControllerFactory.Builder()
-				.plannerObjectType(type).showType(show).edit(false).window(homeAnchorPane.getScene().getWindow()).build();
+				.plannerObjectType(type).window(homeAnchorPane.getScene().getWindow()).build();
 			
 			factory.getControllerAndPop();
 			
@@ -131,7 +125,7 @@ public class HomeController {
 		
 		editTaskItem.setOnAction((event) -> {
 			InputDialogControllerFactory factory = new InputDialogControllerFactory.Builder()
-				.plannerObjectType(type).showType(show).edit(true)
+				.plannerObjectType(type).edit(true)
 				.plannerObject(tomorrowTaskTableView.getSelectionModel().getSelectedItem())
 				.window(homeAnchorPane.getScene().getWindow()).build();
 			
