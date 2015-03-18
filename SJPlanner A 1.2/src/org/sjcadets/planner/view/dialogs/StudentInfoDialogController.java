@@ -148,8 +148,12 @@ public class StudentInfoDialogController extends InputDialogController{
 
 	@Override
 	public void setEdit(AbstractPlannerObject apo) {
-		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public void onCancel() {
+		dialogStage.close();
 	}
 	
 }
